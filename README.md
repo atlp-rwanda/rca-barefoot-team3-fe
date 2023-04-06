@@ -4,8 +4,8 @@
  $ git clone https://github.com/atlp-rwanda/rca-barefoot-team3-fe.git
 
 ## Install Dependencies
-$ npm install
+$ `yarn install`
 
 ## Start the server
 
-$ npm run dev
+$ `yarn dev`
