@@ -1,12 +1,16 @@
 {
     "extends": "airbnb",
+    "plugins": ["jest"],
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "jest/globals": true
     },
     "rules": {
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off"
     }
   }
   
