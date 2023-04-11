@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
-import './App.css';
 
 function App() {
   return (
