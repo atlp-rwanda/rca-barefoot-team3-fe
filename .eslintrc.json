@@ -1,10 +1,10 @@
 {
     "env": {
       "browser": true,
-      "es2022": true,
+      "jest/globals": true,
       "node": true
     },
-      "extends": ["airbnb", "plugin:react-hooks/recommended"],
+      "extends": ["airbnb", "plugin:react-hooks/recommended", "jest"],
       "plugins": ["import", "jsx-a11y", "react",  "react-hooks"],
       "rules": {
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
@@ -15,4 +15,3 @@
         "react/prop-types": "off"
       }
 }
-  
