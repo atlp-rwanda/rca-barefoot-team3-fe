@@ -1,11 +1,11 @@
 {
     "env": {
       "browser": true,
-      "jest/globals": true,
+      "jest": true,
       "node": true
     },
-      "extends": ["airbnb", "plugin:react-hooks/recommended", "jest"],
-      "plugins": ["import", "jsx-a11y", "react",  "react-hooks"],
+      "extends": ["airbnb", "plugin:react-hooks/recommended"],
+      "plugins": ["import", "jsx-a11y", "react",  "react-hooks", "jest"],
       "rules": {
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
         "import/extensions": ["error", "never"],
