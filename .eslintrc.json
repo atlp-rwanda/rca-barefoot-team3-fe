@@ -1,12 +1,18 @@
 {
-    "extends": "airbnb",
     "env": {
       "browser": true,
+      "es2022": true,
       "node": true
     },
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
-  }
+      "extends": ["airbnb", "plugin:react-hooks/recommended"],
+      "plugins": ["import", "jsx-a11y", "react",  "react-hooks"],
+      "rules": {
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "import/extensions": ["error", "never"],
+        "import/no-unresolved": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off"
+      }
+}
   
