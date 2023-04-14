@@ -10,3 +10,5 @@ $ `yarn install`
 ## Start the server
 
 $ `yarn dev`
+
+<a href="https://codeclimate.com/github/atlp-rwanda/rca-barefoot-team3-fe/maintainability"><img src="https://api.codeclimate.com/v1/badges/bdb192bf5abe51030cb6/maintainability" /></a>
