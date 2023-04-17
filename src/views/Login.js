@@ -1,11 +1,11 @@
 import React from 'react';
-import '../scss/login.scss';
-import '../css/login.css'
+import '../../scss/login.scss';
+
 export default function Login() {
   return (
     <div>
       <h3>Login Page</h3>
-      <button class="button-primary">Login</button>
+      <button type="button" className="button-primary">Login</button>
     </div>
   );
 }
