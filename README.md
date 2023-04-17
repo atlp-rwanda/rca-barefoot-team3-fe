@@ -22,6 +22,7 @@
 ## Description
 This a frontend of ``` Barefoot nomad ``` an application that will enable its “Company Nomads” book their international travel and accommodation globally; easily and conveniently across all the locations/centers where the Company has its operations.
 
+## Badges
 
 <a href="https://codeclimate.com/github/atlp-rwanda/rca-barefoot-team3-fe/maintainability"><img src="https://api.codeclimate.com/v1/badges/bdb192bf5abe51030cb6/maintainability" /></a>
 
