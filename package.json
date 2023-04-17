@@ -18,7 +18,7 @@
     "lint:fix": "eslint --fix ./src/**",
     "lint": "eslint ./src/**",
     "preview": "vite preview",
-    "coverage": "jest --coverage --coverageReporters lcov"
+    "coverage": "jest --coverage --coverageReporters lcov && codeclimate-test-reporter < ./coverage/lcov.info "
   },
   "jest": {
     "testEnvironment": "jsdom"
