@@ -1,0 +1,7 @@
+version: '2'
+
+checks:
+  test_coverage:
+    enabled: true
+    output_format: codeclimate
+    coverage_command: "npm run coverage"
