@@ -24,3 +24,9 @@ This a frontend of ``` Barefoot nomad ``` an application that will enable its â€
 
 
 <a href="https://codeclimate.com/github/atlp-rwanda/rca-barefoot-team3-fe/maintainability"><img src="https://api.codeclimate.com/v1/badges/bdb192bf5abe51030cb6/maintainability" /></a>
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bdb192bf5abe51030cb6/test_coverage)](https://codeclimate.com/github/atlp-rwanda/rca-barefoot-team3-fe/test_coverage)
+
+
+[![CircleCI](https://circleci.com/gh/atlp-rwanda/rca-barefoot-team3-fe.svg?style=shield)](https://circleci.com/gh/atlp-rwanda/rca-barefoot-team3-fe)
+
