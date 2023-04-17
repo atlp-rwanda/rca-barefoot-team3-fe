@@ -9,7 +9,7 @@
 - Start the webpack server ``` yarn dev ``` 
 - Navigate to ``` http://localhost:8080/ ```
 
-2. Run tests
+2. To run tests
    ```sh
    yarn test
    ```
