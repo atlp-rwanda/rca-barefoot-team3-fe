@@ -18,7 +18,10 @@
     "lint:fix": "eslint --fix ./src/**",
     "lint": "eslint ./src/**",
     "preview": "vite preview",
-    "coverage":"jest"
+    "coverage": "jest --coverage --coverageReporters lcov"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@babel/core": "^7.21.4",

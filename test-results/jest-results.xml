@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="2.035">
-  <testsuite name="MyComponent" errors="0" failures="0" skipped="0" timestamp="2023-04-17T20:06:19" time="1.538" tests="1">
-    <testcase classname="MyComponent renders correctly" name="MyComponent renders correctly" time="0.034">
-    </testcase>
-  </testsuite>
-</testsuites>
