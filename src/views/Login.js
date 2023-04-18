@@ -1,10 +1,9 @@
 import React from 'react';
-import '../../scss/login.scss';
-
 export default function Login() {
   return (
     <div>
-      <h3>Login Page</h3>
+      <p class='text-red-500 font-3xl '>Login Page</p>
+      <p className="bg-black font-bold ">hello</p>
       <button type="button" className="button-primary">Login</button>
     </div>
   );
