@@ -96,7 +96,7 @@ export default function Regitser() {
     
     <div className='w-8/12 md:w-6/12  bg-white p-4 '> 
             <p className=' py-4 text-center font-bold text-xl md:text-3xl'>Sign Up</p>
-            <p className='text-center'>Already registred? <span className='text-orange-dark font-bold'>Sign In</span></p>
+            <p className='text-center'>Already registered? <span className='text-orange-dark font-bold'>Sign In</span></p>
 
 <Formik
           initialValues={initialValues}
