@@ -1,47 +1,48 @@
-// src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { setMessage } from './message';
 
-const initialState = {
-  user: null,
-  loading: false,
-  error: null,
-};
+import AuthService from '../services/auth.service';
 
-// Async thunk for registering a user
-export const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async (userData, thunkAPI) => {
+const user = JSON.parse(localStorage.getItem('user'));
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async ({
+    first_name, last_name, gender, password, password_confirmation, username, email,
+  }, thunkAPI) => {
     try {
-      const response = await axios.post('/api/register', userData);
+      const response = await AuthService.register(first_name, last_name, gender, password, password_confirmation, username, email);
+      thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      const message = (error.response
+          && error.response.data
+          && error.response.data.message)
+        || error.message
+        || error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
     }
   },
 );
 
-// Redux slice for authentication
+const initialState = user
+  ? { isLoggedIn: true, user }
+  : { isLoggedIn: false, user: null };
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-        state.error = null;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+  extraReducers: {
+    [register.fulfilled]: (state, action) => {
+      state.isLoggedIn = false;
+    },
+    [register.rejected]: (state, action) => {
+      state.isLoggedIn = false;
+    },
+
   },
 });
 
-export default authSlice.reducer;
+const { reducer } = authSlice;
+export default reducer;

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
-import { registerUser } from '../slices/auth';
+import { register } from '../slices/auth';
 
-export default function Regitser() {
+export default function Register() {
   const [successful, setSuccessful] = useState(false);
-
+  const navigate = useNavigate();
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
@@ -16,24 +17,24 @@ export default function Regitser() {
   }, [dispatch]);
 
   const initialValues = {
-    firstname: '',
-    lastname: '',
+    first_name: '',
+    last_name: '',
     gender: '',
     password: '',
-    confirmPassword: '',
+    password_confirmation: '',
     username: '',
     email: '',
   };
 
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string()
+    first_name: Yup.string()
       .test(
         'len',
         'The username must be between 3 and 20 characters.',
         (val) => val && val.toString().length >= 3 && val.toString().length <= 20,
       )
       .required('Username is required!'),
-    lastname: Yup.string()
+    last_name: Yup.string()
       .test(
         'len',
         'The username must be between 3 and 20 characters.',
@@ -55,10 +56,13 @@ export default function Regitser() {
         'len',
         'The password must be between 6 and 40 characters.',
         (val) => val && val.toString().length >= 6 && val.toString().length <= 40,
+      ).matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'A password must contain at least one capital letter, one small letter, one digit, and one special character',
       )
       .required('Password is required!'),
 
-    confirmPassword: Yup.string()
+    password_confirmation: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
       .required('Confirm Password is required'),
     gender: Yup.string().required('Gender is required'),
@@ -67,12 +71,14 @@ export default function Regitser() {
 
   const handleRegister = (formValue) => {
     const {
-      firstname, lastname, gender, password, confirmPassowrd, username, email,
+      first_name, last_name, gender, password, password_confirmation, username, email,
     } = formValue;
-console.log(formValue)
+    console.log(formValue);
     setSuccessful(false);
 
-    dispatch(register({ username, email, password }))
+    dispatch(register({
+      first_name, last_name, gender, password, password_confirmation, username, email,
+    }))
       .unwrap()
       .then(() => {
         setSuccessful(true);
@@ -80,6 +86,11 @@ console.log(formValue)
       .catch(() => {
         setSuccessful(false);
       });
+
+    if (successful) {
+      alert('Create account sucessfully');
+      navigate('/verify');
+    }
   };
 
   return (
@@ -88,8 +99,8 @@ console.log(formValue)
       <div className="flex  p-4 md:w-8/12 justify-center md:p-24 ">
 
         <div className="w-8/12 md:w-6/12  bg-white p-4 ">
-          <p className=" py-4 text-center font-bold text-xl md:text-3xl">Sign Up</p>
-          <p className="text-center">
+          <p className=" py-4  font-bold text-xl md:text-3xl">Sign Up</p>
+          <p className="">
             Already registered?
             <span className="text-orange-dark font-bold">Sign In</span>
           </p>
@@ -104,37 +115,37 @@ console.log(formValue)
                 {!successful && (
                 <div>
                   <div>
-                    <p className="my-4 text-grey-dark ">firstname</p>
+                    <p className="my-4 text-grey-dark ">Firstname</p>
                     <Field
-                      name="firstname"
+                      name="first_name"
                       type="text"
                       className={
                         `w-full h-10 p-2 rounded  border border-grey focus:outline-none${
-                          errors.firstname && touched.firstname
+                          errors.first_name && touched.first_name
                             ? ' is-invalid'
                             : ''}`
                       }
                     />
                     <ErrorMessage
-                      name="firstname"
+                      name="first_name"
                       component="div"
                       className="text-red"
                     />
                   </div>
                   <div>
-                    <p className="my-4 text-grey-dark ">lastname</p>
+                    <p className="my-4 text-grey-dark ">Lastname</p>
                     <Field
-                      name="lastname"
+                      name="last_name"
                       type="text"
                       className={
                         `w-full h-10 p-2 rounded  border border-grey focus:outline-none${
-                          errors.lastname && touched.lastname
+                          errors.last_name && touched.last_name
                             ? ' is-invalid'
                             : ''}`
                       }
                     />
                     <ErrorMessage
-                      name="lastname"
+                      name="last_name"
                       component="div"
                       className="text-red"
                     />
@@ -228,7 +239,7 @@ console.log(formValue)
                   <div>
                     <p className="my-4 text-grey-dark ">Confirm Password</p>
                     <Field
-                      name="confirmPassword"
+                      name="password_confirmation"
                       type="password"
                       className={
                         `w-full h-10 p-2 rounded  border border-grey focus:outline-none${
@@ -238,7 +249,7 @@ console.log(formValue)
                       }
                     />
                     <ErrorMessage
-                      name="confirmPassword"
+                      name="password_confirmation"
                       component="div"
                       className="text-red"
                     />

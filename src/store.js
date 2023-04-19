@@ -9,5 +9,4 @@ const reducer = {
 
 export const store = configureStore({
   reducer,
-  devTools: true,
 });
