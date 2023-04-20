@@ -3,7 +3,7 @@ import { setMessage } from './message';
 
 import AuthService from '../services/auth.service';
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem('user'));
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -11,11 +11,19 @@ export const register = createAsyncThunk(
     first_name, last_name, gender, password, password_confirmation, username, email,
   }, thunkAPI) => {
     try {
-      const response = await AuthService.register(first_name, last_name, gender, password, password_confirmation, username, email);
+      const response = await AuthService.register(
+        first_name,
+        last_name,
+        gender,
+        password,
+        password_confirmation,
+        username,
+        email,
+      );
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      const message =error.response.data.errors.message[0]
+      const message = error.response.data.errors.message[0];
 
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
@@ -26,14 +34,14 @@ export const register = createAsyncThunk(
 export const verify = createAsyncThunk(
   'auth/verify',
   async ({
-   code, email
+    code, email,
   }, thunkAPI) => {
     try {
-      const response = await AuthService.verify(code,email);
+      const response = await AuthService.verify(code, email);
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      const message =error.response.data.errors.message[0]
+      const message = error.response.data.errors.message[0];
 
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import {
@@ -75,7 +75,7 @@ export default function Register() {
       first_name, last_name, gender, password, password_confirmation, username, email,
     } = formValue;
 
-   await dispatch(register({
+    await dispatch(register({
       first_name, last_name, gender, password, password_confirmation, username, email,
     }))
       .unwrap()
@@ -92,8 +92,6 @@ export default function Register() {
             navigate('/verify');
           },
         }); // Display success toast
-       
-
       })
       .catch(() => {
         toast.error(message, {
@@ -106,8 +104,6 @@ export default function Register() {
           className: 'toast-error', // Add custom class for error toast
         });
       });
-
-   
   };
 
   return (
@@ -117,12 +113,13 @@ export default function Register() {
 
         <div className="w-8/12 md:w-6/12  bg-white p-4 ">
           <p className=" py-4  font-bold text-xl md:text-3xl">Sign Up</p>
-          <Link to='/login'>
+          <Link to="/login">
 
-          <p className="">
-            Already registered?
-            <span className="text-orange-dark font-bold">Sign In</span>
-          </p></Link>
+            <p className="">
+              Already registered?
+              <span className="text-orange-dark font-bold">Sign In</span>
+            </p>
+          </Link>
 
           <Formik
             initialValues={initialValues}
@@ -131,7 +128,7 @@ export default function Register() {
           >
             {({ errors, touched }) => (
               <Form>
-               
+
                 <div>
                   <div>
                     <p className="my-4 text-grey-dark ">Firstname</p>
@@ -217,7 +214,7 @@ export default function Register() {
                           errors.gender && touched.gender ? ' is-invalid' : ''}`
                       }
                     />
-                  
+
                     <p className=" text-gray-400">female</p>
                     <Field
                       name="gender"
@@ -229,7 +226,7 @@ export default function Register() {
                           errors.gender && touched.gender ? ' is-invalid' : ''}`
                       }
                     />
-                    
+
                     <p className="text-gray-400">male</p>
                     <ErrorMessage
                       name="gender"
@@ -283,9 +280,9 @@ export default function Register() {
         <div className=" bg-black w-6/12">
           <img className=" w-full object-fill" src="/images/signup.jpg" alt="hotel" />
         </div>
-      
+
       </div>
-      <ToastContainer /> 
+      <ToastContainer />
     </div>
   );
 }

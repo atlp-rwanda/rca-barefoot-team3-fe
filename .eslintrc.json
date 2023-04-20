@@ -10,9 +10,13 @@
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
         "import/extensions": ["error", "never"],
         "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^action$" }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/prop-types": "off",
-        "camelcase": "off"
+        "camelcase": "off",
+        "no-param-reassign": "off"
+
       }
 }
