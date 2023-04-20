@@ -6,7 +6,8 @@ import Regitser from './views/Regitser';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Regitser />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Regitser />} />
     </Routes>
   );
 }
