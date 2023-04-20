@@ -3,7 +3,7 @@ import { setMessage } from './message';
 
 import AuthService from '../services/auth.service';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem("user"));
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -15,11 +15,26 @@ export const register = createAsyncThunk(
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      const message = (error.response
-          && error.response.data
-          && error.response.data.message)
-        || error.message
-        || error.toString();
+      const message =error.response.data.errors.message[0]
+
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  },
+);
+
+export const verify = createAsyncThunk(
+  'auth/verify',
+  async ({
+   code, email
+  }, thunkAPI) => {
+    try {
+      const response = await AuthService.verify(code,email);
+      thunkAPI.dispatch(setMessage(response.data.message));
+      return response.data;
+    } catch (error) {
+      const message =error.response.data.errors.message[0]
+
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue();
     }
@@ -38,6 +53,12 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
     [register.rejected]: (state, action) => {
+      state.isLoggedIn = false;
+    },
+    [verify.fulfilled]: (state, action) => {
+      state.isLoggedIn = false;
+    },
+    [verify.rejected]: (state, action) => {
       state.isLoggedIn = false;
     },
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
@@ -8,7 +10,6 @@ import * as Yup from 'yup';
 import { register } from '../slices/auth';
 
 export default function Register() {
-  const [successful, setSuccessful] = useState(false);
   const navigate = useNavigate();
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -69,28 +70,44 @@ export default function Register() {
 
   });
 
-  const handleRegister = (formValue) => {
+  const handleRegister = async (formValue) => {
     const {
       first_name, last_name, gender, password, password_confirmation, username, email,
     } = formValue;
-    console.log(formValue);
-    setSuccessful(false);
 
-    dispatch(register({
+   await dispatch(register({
       first_name, last_name, gender, password, password_confirmation, username, email,
     }))
       .unwrap()
       .then(() => {
-        setSuccessful(true);
+        toast.success('Registration successful!', {
+          position: 'top-right', // Set position to top-right
+          autoClose: 3000, // Auto-close the toast after 3 seconds
+          hideProgressBar: false, // Show progress bar
+          closeOnClick: true, // Close toast on click
+          pauseOnHover: true, // Pause toast on hover
+          draggable: true, // Make toast draggable
+          onClose: () => {
+            // Navigate to /login after toast is closed
+            navigate('/verify');
+          },
+        }); // Display success toast
+       
+
       })
       .catch(() => {
-        setSuccessful(false);
+        toast.error(message, {
+          position: 'top-right', // Set position to top-right
+          autoClose: 3000, // Auto-close the toast after 3 seconds
+          hideProgressBar: false, // Show progress bar
+          closeOnClick: true, // Close toast on click
+          pauseOnHover: true, // Pause toast on hover
+          draggable: true, // Make toast draggable
+          className: 'toast-error', // Add custom class for error toast
+        });
       });
 
-    if (successful) {
-      alert('Create account sucessfully');
-      navigate('/verify');
-    }
+   
   };
 
   return (
@@ -100,10 +117,12 @@ export default function Register() {
 
         <div className="w-8/12 md:w-6/12  bg-white p-4 ">
           <p className=" py-4  font-bold text-xl md:text-3xl">Sign Up</p>
+          <Link to='/login'>
+
           <p className="">
             Already registered?
             <span className="text-orange-dark font-bold">Sign In</span>
-          </p>
+          </p></Link>
 
           <Formik
             initialValues={initialValues}
@@ -112,7 +131,7 @@ export default function Register() {
           >
             {({ errors, touched }) => (
               <Form>
-                {!successful && (
+               
                 <div>
                   <div>
                     <p className="my-4 text-grey-dark ">Firstname</p>
@@ -198,7 +217,7 @@ export default function Register() {
                           errors.gender && touched.gender ? ' is-invalid' : ''}`
                       }
                     />
-                    {' '}
+                  
                     <p className=" text-gray-400">female</p>
                     <Field
                       name="gender"
@@ -210,7 +229,7 @@ export default function Register() {
                           errors.gender && touched.gender ? ' is-invalid' : ''}`
                       }
                     />
-                    {' '}
+                    
                     <p className="text-gray-400">male</p>
                     <ErrorMessage
                       name="gender"
@@ -256,7 +275,6 @@ export default function Register() {
                   </div>
                   <button type="submit" className="   my-2 w-full button-primary">Sign Up</button>
                 </div>
-                )}
               </Form>
             )}
           </Formik>
@@ -265,20 +283,9 @@ export default function Register() {
         <div className=" bg-black w-6/12">
           <img className=" w-full object-fill" src="/images/signup.jpg" alt="hotel" />
         </div>
-        {message && (
-        <div>
-          <div
-            className={
-              successful ? 'alert alert-success' : 'alert alert-danger'
-            }
-            role="alert"
-          >
-            {message}
-          </div>
-        </div>
-        )}
+      
       </div>
-
+      <ToastContainer /> 
     </div>
   );
 }
