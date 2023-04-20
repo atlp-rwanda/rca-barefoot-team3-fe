@@ -1,25 +1,28 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { GrFacebook } from "react-icons/gr";
-import { FcGoogle } from "react-icons/fc";
-import * as Yup from "yup";
-import Button from "../../components/Button";
-import SocialButton from "../../components/SocialButton";
-import { login } from "../../utils/api";
-import { setToken, setAuthenticated } from "../../redux/authslice";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import {
+  Formik, Field, Form, ErrorMessage,
+} from 'formik';
+import { GrFacebook } from 'react-icons/gr';
+import { FcGoogle } from 'react-icons/fc';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import SocialButton from '../../components/SocialButton';
+import { login } from '../../utils/api';
+import { setToken, setAuthenticated } from '../../redux/authslice';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const dispatch = useDispatch();
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("This is not a valid email.")
-      .required("Email is required!"),
-    password: Yup.string().required("Password is required!"),
+      .email('This is not a valid email.')
+      .required('Email is required!'),
+    password: Yup.string().required('Password is required!'),
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
@@ -28,6 +31,7 @@ export default function Login() {
       dispatch(setToken(token));
       dispatch(setAuthenticated(true));
     }
+    toast.success('You have been successfully authenticated!');
     setSubmitting(false);
   };
 
@@ -105,6 +109,18 @@ export default function Login() {
           />
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

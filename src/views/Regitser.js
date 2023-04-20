@@ -69,7 +69,7 @@ export default function Regitser() {
     const {
       firstname, lastname, gender, password, confirmPassowrd, username, email,
     } = formValue;
-console.log(formValue)
+    console.log(formValue);
     setSuccessful(false);
 
     dispatch(register({ username, email, password }))
