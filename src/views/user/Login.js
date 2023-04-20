@@ -1,12 +1,16 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { GrFacebook } from "react-icons/gr";
-import Button from "../../components/Button";
-import SocialButton from "../../components/SocialButton";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
+import Button from "../../components/Button";
+import SocialButton from "../../components/SocialButton";
+import { login } from "../../utils/api";
+import { setToken, setAuthenticated } from "../../redux/authslice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: "",
@@ -18,8 +22,13 @@ export default function Login() {
     password: Yup.string().required("Password is required!"),
   });
 
-  const onLogin = (values) => {
-    console.log(values);
+  const onSubmit = async (values, { setSubmitting }) => {
+    const token = await login(values.email, values.password);
+    if (token) {
+      dispatch(setToken(token));
+      dispatch(setAuthenticated(true));
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -39,42 +48,51 @@ export default function Login() {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              onSubmit={onLogin}
+              onSubmit={onSubmit}
             >
-              <Form>
-                <div className="py-4">
-                  <p className="my-4 text-grey-dark ">Email Address</p>
-                  <Field
-                    className="border border text-sm w-full p-3"
-                    name="email"
-                    component="input"
-                    type="text"
-                    placeholder="Enter your email address"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="mt-2 text-red"
-                  />
-                </div>
-                <div className="pb-4 ">
-                  <p className="my-4 text-grey-dark ">Password</p>
-                  <Field
-                    className="border border text-sm  w-full p-3"
-                    name="password"
-                    component="input"
-                    type="password"
-                    placeholder="Enter your password"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="mt-2 text-red"
-                  />
-                </div>
-              </Form>
+              {({ isSubmitting }) => (
+                <Form>
+                  <div className="py-4">
+                    <p className="my-4 text-grey-dark ">Email Address</p>
+                    <Field
+                      className="border border text-sm w-full p-3"
+                      name="email"
+                      component="input"
+                      type="text"
+                      placeholder="Enter your email address"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="mt-2 text-red"
+                    />
+                  </div>
+                  <div className="pb-4 ">
+                    <p className="my-4 text-grey-dark ">Password</p>
+                    <Field
+                      className="border border text-sm  w-full p-3"
+                      name="password"
+                      component="input"
+                      type="password"
+                      placeholder="Enter your password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="mt-2 text-red"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="my-2 w-full h-14 button-primary"
+                  >
+                    Submit
+                  </button>
+                </Form>
+              )}
             </Formik>
-            <Button text="Login" />
+            {/* <Button text="Login" /> */}
             <SocialButton icon={<FcGoogle />} text="Sign in with Google" />
             <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" />
           </div>
