@@ -6,7 +6,7 @@ import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
 import { login } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
@@ -95,7 +95,6 @@ export default function Login() {
                 </Form>
               )}
             </Formik>
-            {/* <Button text="Login" /> */}
             <SocialButton icon={<FcGoogle />} text="Sign in with Google" />
             <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" />
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,6 +13,7 @@ export default function Register() {
   const navigate = useNavigate();
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
+  const [successful, setSuccessful]= useState(false);
 
   useEffect(() => {
   }, [dispatch]);
