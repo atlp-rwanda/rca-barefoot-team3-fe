@@ -13,7 +13,6 @@ export default function Register() {
   const navigate = useNavigate();
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  const [successful, setSuccessful]= useState(false);
 
   useEffect(() => {
   }, [dispatch]);
@@ -76,7 +75,6 @@ export default function Register() {
       first_name, last_name, gender, password, password_confirmation, username, email,
     } = formValue;
     console.log(formValue);
-    setSuccessful(false);
 
     await dispatch(register({
       first_name, last_name, gender, password, password_confirmation, username, email,

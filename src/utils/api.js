@@ -12,11 +12,11 @@ export const login = async (email, password) => {
       password,
     });
     const { token } = response.data;
-    Cookies.set("token", token);
-    toast.success("You have been successfully authenticated!");
+    Cookies.set('token', token);
+    toast.success('You have been successfully authenticated!');
     return token;
   } catch (error) {
-    toast.error(error.response.data.errors || "Something went wrong!");
+    toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
   }
 };
