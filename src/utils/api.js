@@ -11,7 +11,6 @@ export const login = async (email, password) => {
       email,
       password,
     });
-    console.log(" reponse ", response);
     const { token } = response.data;
     Cookies.set('token', token);
     toast.success('You have been successfully authenticated!');

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/v1/users';
+const API_URL = 'http://localhost:8000/api/v1/users';
 
 const register = (
   first_name,

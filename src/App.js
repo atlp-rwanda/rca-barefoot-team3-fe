@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Register from './views/Register';
-import Login from './views/Login';
+import Login from './views/user/Login';
 import Verify from './views/Verify';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
