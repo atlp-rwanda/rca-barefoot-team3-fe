@@ -31,7 +31,6 @@ export default function Login() {
       dispatch(setToken(token));
       dispatch(setAuthenticated(true));
     }
-    toast.success('You have been successfully authenticated!');
     setSubmitting(false);
   };
 
