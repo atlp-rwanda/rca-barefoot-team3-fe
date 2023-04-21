@@ -25,6 +25,8 @@ module.exports = {
           "style-loader",
           "css-loader",
           "sass-loader",
+          'postcss-loader',
+
           
         ]
       },
@@ -39,4 +41,8 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
+  devServer: {
+    // Enable historyApiFallback for client-side routing
+    historyApiFallback: true,
+  },
 }
