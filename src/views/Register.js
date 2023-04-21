@@ -74,6 +74,8 @@ export default function Register() {
     const {
       first_name, last_name, gender, password, password_confirmation, username, email,
     } = formValue;
+    console.log(formValue);
+    setSuccessful(false);
 
     await dispatch(register({
       first_name, last_name, gender, password, password_confirmation, username, email,
