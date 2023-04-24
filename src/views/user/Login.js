@@ -11,6 +11,7 @@ import SocialButton from '../../components/SocialButton';
 import { login } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
+import FacebookLogin from 'react-facebook-login';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -24,7 +25,30 @@ export default function Login() {
       .required('Email is required!'),
     password: Yup.string().required('Password is required!'),
   });
-
+  
+  function LoginWithFacebook() {
+    const dispatch = useDispatch();
+  
+    const responseFacebook = async (response) => {
+      if (response.accessToken) {
+        const token = await loginWithFacebook(response.accessToken);
+        if (token) {
+          dispatch(setToken(token));
+          dispatch(setAuthenticated(true));
+        }
+      }
+    };
+  
+    return (
+      <FacebookLogin
+        appId="880261419941182"
+        fields="name,email,picture"
+        callback={responseFacebook}
+        icon="fa-facebook"
+      />
+    );
+  }
+  
   const onSubmit = async (values, { setSubmitting }) => {
     const token = await login(values.email, values.password);
     if (token) {
@@ -96,8 +120,9 @@ export default function Login() {
               )}
             </Formik>
             <SocialButton icon={<FcGoogle />} text="Sign in with Google" />
-            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" />
-          </div>
+            <LoginWithFacebook icon={<GrFacebook />}/>
+
+  </div>
         </div>
         <div className=" bg-black w-6/12">
           <img
@@ -121,4 +146,5 @@ export default function Login() {
       />
     </div>
   );
-}
+
+              }

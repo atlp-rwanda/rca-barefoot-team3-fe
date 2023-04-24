@@ -24,8 +24,7 @@ module.exports = {
         use: [
           "style-loader",
           "css-loader",
-          "sass-loader",
-          'postcss-loader',
+          "sass-loader"
 
           
         ]
