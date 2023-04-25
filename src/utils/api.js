@@ -24,7 +24,7 @@ export const login = async (email, password) => {
 export async function loginWithFacebook(accessToken) {
   try {
     const response = await fetch('/api/auth/facebook', {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -25,10 +25,8 @@ export default function Login() {
       .required('Email is required!'),
     password: Yup.string().required('Password is required!'),
   });
-  
-  function LoginWithFacebook() {
-    const dispatch = useDispatch();
 
+  function LoginWithFacebook() {
     const responseFacebook = async (response) => {
       if (response.accessToken) {
         const token = await loginWithFacebook(response.accessToken);
