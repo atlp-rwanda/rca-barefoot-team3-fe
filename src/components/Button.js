@@ -12,21 +12,16 @@
 import React from 'react';
 
 export default function Button({
-  handleClick, text, className, type,
+  handleClick, text, className, isDisabled,
 }) {
   return (
     <button
-      type={isDisabled ? 'disabled' : 'button'}
+      type="button"
       className={className}
+      disabled={isDisabled}
       onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          handleClick();
-        }
-      }}
     >
-      {children}
+      {text}
     </button>
-
   );
 }
