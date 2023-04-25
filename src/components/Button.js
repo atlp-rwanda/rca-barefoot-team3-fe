@@ -12,11 +12,11 @@
 import React from 'react';
 
 export default function Button({
-  handleClick, text, className, isDisabled,
+  handleClick, text, className, type, isDisabled,
 }) {
   return (
     <button
-      type="button"
+      type={isDisabled ? 'disabled' : type}
       className={className}
       disabled={isDisabled}
       onClick={handleClick}
