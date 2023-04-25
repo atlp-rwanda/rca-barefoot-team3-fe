@@ -272,8 +272,13 @@ export default function Register() {
                       className="text-red"
                     />
                   </div>
-                  {/* <button type="submit" className="   my-2 w-full button-primary">Sign Up</button> */}
-                  <Button handleClick={() => console.log('Button clicked!')} text="Sign Up" className="my-2 w-full button-primary" />
+                  {/* <button type="submit" className="   my-2
+                  w-full button-primary">Sign Up</button> */}
+                  <Button
+                    handleClick={() => console.log('Button clicked!')}
+                    text="Sign Up"
+                    className="my-2 w-full button-primary"
+                  />
                 </div>
               </Form>
             )}
