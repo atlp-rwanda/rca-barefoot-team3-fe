@@ -15,8 +15,18 @@ export default function Button({
   handleClick, text, className, type,
 }) {
   return (
-    <button type={type} className={className} onClick={handleClick}>
-      {text}
+    <button
+      type={isDisabled ? 'disabled' : 'button'}
+      className={className}
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          handleClick();
+        }
+      }}
+    >
+      {children}
     </button>
+
   );
 }
