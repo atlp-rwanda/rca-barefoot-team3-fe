@@ -8,10 +8,11 @@
 //   );
 // }
 
-
 import React from 'react';
 
-export default function Button({ handleClick, text, className, type }) {
+export default function Button({
+  handleClick, text, className, type,
+}) {
   return (
     <button type={type} className={className} onClick={handleClick}>
       {text}

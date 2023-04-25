@@ -6,7 +6,7 @@ import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-toastify'; 
+import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
 import { login } from '../../utils/api';
 import Button from '../../components/Button';
@@ -32,7 +32,7 @@ export default function Login() {
       dispatch(setToken(token));
       dispatch(setAuthenticated(true));
     }
-    setSubmitting(false); 
+    setSubmitting(false);
   };
 
   return (
@@ -94,7 +94,7 @@ export default function Login() {
                     Submit
                   </button> */}
 
-                  <Button handleClick={() => console.log('Form submitted!')} text="Submit" type="submit" className="my-2 w-full h-14 button-primary" />
+                  <Button handleClick={() => console.log('Form submitted!')} text="Submit" type="submit" disabled={isSubmitting} className="my-2 w-full h-14 button-primary" />
                 </Form>
               )}
             </Formik>
