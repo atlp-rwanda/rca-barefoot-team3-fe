@@ -13,6 +13,29 @@ import { login, loginWithFacebook } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 
+function LoginWithFacebook() {
+  const dispatch = useDispatch();
+
+  const responseFacebook = async (response) => {
+    if (response.accessToken) {
+      const token = await loginWithFacebook(response.accessToken);
+      if (token) {
+        dispatch(setToken(token));
+        dispatch(setAuthenticated(true));
+      }
+    }
+  };
+
+  return (
+    <FacebookLogin
+      appId="880261419941182"
+      fields="name,email,picture"
+      callback={responseFacebook}
+      icon="fa-facebook"
+    />
+  );
+}
+
 export default function Login() {
   const dispatch = useDispatch();
   const initialValues = {
@@ -25,27 +48,6 @@ export default function Login() {
       .required('Email is required!'),
     password: Yup.string().required('Password is required!'),
   });
-
-  function LoginWithFacebook() {
-    const responseFacebook = async (response) => {
-      if (response.accessToken) {
-        const token = await loginWithFacebook(response.accessToken);
-        if (token) {
-          dispatch(setToken(token));
-          dispatch(setAuthenticated(true));
-        }
-      }
-    };
-
-    return (
-      <FacebookLogin
-        appId="880261419941182"
-        fields="name,email,picture"
-        callback={responseFacebook}
-        icon="fa-facebook"
-      />
-    );
-  }
 
   const onSubmit = async (values, { setSubmitting }) => {
     const token = await login(values.email, values.password);
