@@ -6,6 +6,7 @@ import Register from './views/Register';
 import Login from './views/user/Login';
 import Verify from './views/Verify';
 import { setToken, setAuthenticated } from './redux/authslice';
+import { LandingPage } from './views/landing';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Register />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/verify" element={<Verify />} />
     </Routes>
