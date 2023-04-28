@@ -2,7 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-  entry: path.join(__dirname, "src", "index.js"),
+  entry: path.join(__dirname, "src", "main.js"),
   mode: 'none',
   output: {
     path:path.resolve(__dirname, "dist"),
@@ -19,6 +19,21 @@ module.exports = {
           }
         }
       },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          "postcss-loader"
+
+          
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader','postcss-loader'],
+      },
     ]
   },
   plugins: [
@@ -26,4 +41,8 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
+  devServer: {
+    // Enable historyApiFallback for client-side routing
+    historyApiFallback: true,
+  },
 }
