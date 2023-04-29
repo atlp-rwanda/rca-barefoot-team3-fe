@@ -6,6 +6,7 @@ import Register from './views/Register';
 import Login from './views/user/Login';
 import Verify from './views/Verify';
 import { setToken, setAuthenticated } from './redux/authslice';
+import ResetPassword from './views/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/verify" element={<Verify />} />
+      <Route path="/reset-password" element={<ResetPassword/>} />
     </Routes>
   );
 }
