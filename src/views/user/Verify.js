@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify'; // Import the toast module
-import { verify } from '../slices/auth';
+import { verify } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles
 
 function Verify() {

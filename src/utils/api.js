@@ -5,6 +5,24 @@ import { toast } from 'react-toastify';
 
 const apiUrl = 'http://localhost:8000/api/v1';
 
+
+const register = (
+  first_name,
+  last_name,
+  gender,
+  password,
+  password_confirmation,
+  username,
+  email,
+) => axios.post(apiUrl+'/users', {
+  first_name, last_name, gender, password, password_confirmation, username, email,
+});
+
+
+const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
+  code,
+});
+
 export const login = async (email, password) => {
   try {
     const response = await axios.post(`${apiUrl}/users/login`, {
@@ -20,3 +38,11 @@ export const login = async (email, password) => {
     return null;
   }
 };
+
+
+const AuthService = {
+  register,
+  verify,
+};
+
+export default AuthService;
