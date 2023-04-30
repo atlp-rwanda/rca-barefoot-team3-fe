@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack && node-sass src/scss/ -o build/static/css/",
+    "build": "webpack && node-sass src/scss/ -o dist/static/css/",
     "test": "jest",
     "lint:fix": "eslint --fix ./src/**",
     "lint": "eslint ./src/**",
