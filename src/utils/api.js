@@ -23,7 +23,25 @@ const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
   code,
 });
 
-export const login = async (email, password) => {
+
+const register = (
+  first_name,
+  last_name,
+  gender,
+  password,
+  password_confirmation,
+  username,
+  email,
+) => axios.post(apiUrl+'/users', {
+  first_name, last_name, gender, password, password_confirmation, username, email,
+});
+
+
+const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
+  code,
+});
+
+const login = async (email, password) => {
   try {
     const response = await axios.post(`${apiUrl}/users/login`, {
       email,
@@ -39,10 +57,11 @@ export const login = async (email, password) => {
   }
 };
 
+const getAllAccomodations = async () => {
+  const response = await axios.get(`${apiUrl}/accommodations/`);
 
-const AuthService = {
-  register,
-  verify,
-};
+  return response.data;
+}
 
-export default AuthService;
+
+export { login, getAllAccomodations }
