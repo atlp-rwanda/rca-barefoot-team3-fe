@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
@@ -5,7 +6,6 @@ import { toast } from 'react-toastify';
 
 const apiUrl = 'http://localhost:8000/api/v1';
 
-
 const register = (
   first_name,
   last_name,
@@ -24,22 +24,6 @@ const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
 });
 
 
-const register = (
-  first_name,
-  last_name,
-  gender,
-  password,
-  password_confirmation,
-  username,
-  email,
-) => axios.post(apiUrl+'/users', {
-  first_name, last_name, gender, password, password_confirmation, username, email,
-});
-
-
-const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
-  code,
-});
 
 const login = async (email, password) => {
   try {
@@ -62,6 +46,13 @@ const getAllAccomodations = async () => {
 
   return response.data;
 }
+const getAllBookings = async(token) => {
 
-
-export { login, getAllAccomodations }
+  const response = await axios.get(`${apiUrl}/booking/all`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+export { login, getAllAccomodations,register,verify,getAllBookings }

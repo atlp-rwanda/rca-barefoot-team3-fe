@@ -7,7 +7,7 @@ import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
-import { register } from '../../redux/authslice';
+import { registerUser } from '../../redux/authslice';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export default function Register() {
     } = formValue;
     console.log(formValue);
 
-    await dispatch(register({
+    await dispatch(registerUser({
       first_name, last_name, gender, password, password_confirmation, username, email,
     }))
       .unwrap()

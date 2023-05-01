@@ -1,6 +1,6 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './messageSlice';
-import AuthService from '../utils/api';
+import {register,verify} from '../utils/api';
 const initialState = {
   isAuthenticated: false,
   token: null,
@@ -19,13 +19,13 @@ const authSlice = createSlice({
   },
 });
 
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   'auth/register',
   async ({
     first_name, last_name, gender, password, password_confirmation, username, email,
   }, thunkAPI) => {
     try {
-      const response = await AuthService.register(
+      const response = register(
         first_name,
         last_name,
         gender,
@@ -45,13 +45,13 @@ export const register = createAsyncThunk(
   },
 );
 
-export const verify = createAsyncThunk(
+export const verifyUser = createAsyncThunk(
   'auth/verify',
   async ({
     code, email,
   }, thunkAPI) => {
     try {
-      const response = await AuthService.verify(code, email);
+      const response = verify(code, email);
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
