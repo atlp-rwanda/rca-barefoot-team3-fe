@@ -27,8 +27,6 @@ export default function InitiateResetPassword() {
     }else{
       toast.error("Something went wrong");
     }
-   
-
   }
   return (
     <div className=" flex justify-center w-full h-screen bg-orange-light ">

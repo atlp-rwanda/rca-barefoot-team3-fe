@@ -37,10 +37,12 @@ export const initiateResetPassword = async (email) => {
   }
 };
 
-export const ResetPassword = async (data) => {
+export const resetPassword = async (data, email) => {
   try {
-    const response = await axios.post(`${apiUrl}/users/reset-password`, data);
-    console.log(response);
+    const response = await axios.post(`${apiUrl}/users/reset-password`, {
+      email,
+      ...data,
+    });
     return true;
   } catch (error) {
     toast.error(error.response.data.errors || "Something went wrong!");
