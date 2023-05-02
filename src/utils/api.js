@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+
 const apiUrl = 'http://localhost:8000/api/v1';
 
 const register = (
