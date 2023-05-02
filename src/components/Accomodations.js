@@ -19,7 +19,7 @@ export default function Accomodations() {
     }, [])
 
     return (
-        <Dashboard>
+        <>
             <h2 className='font-bold pb-8'>New Accomodations</h2>
             <div className='flex justify-start gap-10 flex-wrap'>
                 {loading ? (
@@ -30,7 +30,6 @@ export default function Accomodations() {
 
                     ))
                 )}
-            </div>
-        </Dashboard>
+            </div></>
     )
 }

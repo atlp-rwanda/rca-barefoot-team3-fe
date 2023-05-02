@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Dashboard from '../components/Dashboard';
 import { getAllBookings } from '../utils/api';
 
 export default function Bookings() {
@@ -54,8 +53,8 @@ export default function Bookings() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <Dashboard>
       <div>
+        
         <input
         className='p-3 rounded'
           placeholder='Search bookings'
@@ -99,7 +98,11 @@ export default function Bookings() {
           </button>
         
         </div>
-        <table className="table table-responsive table-auto w-full p-2 bg-white">
+        {loading ? (
+                    <p>Loading ....</p>
+                ) : (
+                    
+<table className="table table-responsive table-auto w-full p-2 bg-white">
           <thead className="font-bold">
             <tr className='border-b border-gray-300'> 
               <th className='py-6 '>Created By</th>
@@ -124,6 +127,9 @@ export default function Bookings() {
           </tbody>
            
         </table>
+                    )
+            }
+        
 
        <div className=' w-[100%]  my-4 '>
           {bookings.length > bookingsPerPage && (
@@ -139,6 +145,5 @@ export default function Bookings() {
           )}
         </div>
       </div>
-    </Dashboard>
   )
 }

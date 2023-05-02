@@ -1,8 +1,27 @@
-import React from 'react'
-import HotelCard from './HotelCard'
+import React,{useState,useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import Accomodations from './Accomodations'
+import Bookings from './Bookings';
+import { useNavigate } from 'react-router-dom';
 
-export default function Dashboard({children}) {
+export default function Dashboard() {
+        const { token } = useSelector((state) => state.auth);
+
+    const [activeLink, setActiveLink] = useState("/");
+
+    const links = [
+        { name: "Dashboard", path: "/" },
+        { name: "Accommodations", path: "/accommodations" },
+        { name: "Bookings", path: "/bookings" },
+      ];
+      const navigate = useNavigate();
+
+ console.log('token:', token);
+
+ if (!token) {
+   navigate('/login');
+ }
+
     return (
         <div>
             <nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
@@ -26,47 +45,35 @@ export default function Dashboard({children}) {
                 </div>
             </nav>
             <div className="flex overflow-hidden pt-8">
+           
                 <aside id="sidebar" className="fixed z-20 h-full top-0 left-0 pt-12 flex lg:flex flex-shrink-0 flex-col w-64" aria-label="Sidebar">
                     <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 text-white bg-primary pt-0">
                         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                             <div className="flex-1 px-3 bg-primary">
-                                <div className="space-y-2 pt-2">
-                                    <a href="/" target="_blank" className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
+                            {links.map(({ name, path }) => (
+                                <><div className="space-y-2 pt-2">
+                                    <p  onClick={()=>setActiveLink(path)}  className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
                                         <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                                             <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
                                         </svg>
-                                        <span className="ml-3">Dashboard</span>
-                                    </a>
+                                        <span className="ml-3">{name}</span>
+                                    </p>
                                 </div>
-                                <div className="space-y-2 pt-2">
-                                    <a href="/" target="_blank" className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
-                                        <svg className="w-6 h-6  transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-                                        </svg>
-                                        <span className="ml-3">Accomodations</span>
-                                    </a>
-                                </div>
-                                <div className="space-y-2 pt-2">
-                                    <a href="/bookings" target="_blank" className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
-                                        <svg className="w-6 h-6  transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-                                        </svg>
-                                        <span className="ml-3">Bookings</span>
-                                    </a>
-                                </div>
+                                
+                                </>
+                                   ))}
                             </div>
                         </div>
                     </div>
                 </aside>
+         
                 <div className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop" />
                 <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                     <main>
                         <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-                        {children}
-                            {/* <Accomodations /> */}
+                        {activeLink === '/accommodations' && <Accomodations />}
+                        {activeLink === '/bookings' && <Bookings />}
                         </div>
                     </main>
                 </div>

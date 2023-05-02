@@ -7,11 +7,10 @@ import Login from './views/user/Login';
 import Verify from './views/user/Verify';
 import { setToken, setAuthenticated } from './redux/authslice';
 import Dashboard from './components/Dashboard';
-import Bookings from './views/Bookings';
 
 function App() {
   const dispatch = useDispatch();
-
+  const token = Cookies.get('token');
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
@@ -25,8 +24,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/verify" element={<Verify />} />
-      <Route path="/admin" element={<Dashboard />} />
-      <Route path="/bookings" element={<Bookings />} />
+      <Route path="/admin" element= {<Dashboard />} />
 
     </Routes>
   );
