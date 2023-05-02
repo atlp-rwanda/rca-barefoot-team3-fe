@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const apiUrl = 'http://localhost:8000/api/v1';
 
-export const login = async (email, password) => {
+const login = async (email, password) => {
   try {
     const response = await axios.post(`${apiUrl}/users/login`, {
       email,
@@ -42,3 +42,12 @@ export async function loginWithFacebook(accessToken) {
     return null;
   }
 }
+
+const getAllAccomodations = async () => {
+  const response = await axios.get(`${apiUrl}/accommodations/`);
+
+  return response.data;
+}
+
+
+export { login, getAllAccomodations }

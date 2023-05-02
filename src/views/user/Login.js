@@ -83,7 +83,7 @@ export default function Login() {
                   <div className="py-4">
                     <p className="my-4 text-grey-dark ">Email Address</p>
                     <Field
-                      className="border border text-sm w-full p-3"
+                      className="border text-sm w-full p-3"
                       name="email"
                       component="input"
                       type="text"
@@ -98,7 +98,7 @@ export default function Login() {
                   <div className="pb-4 ">
                     <p className="my-4 text-grey-dark ">Password</p>
                     <Field
-                      className="border border text-sm  w-full p-3"
+                      className="border text-sm  w-full p-3"
                       name="password"
                       component="input"
                       type="password"
