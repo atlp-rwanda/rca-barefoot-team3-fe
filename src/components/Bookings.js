@@ -4,7 +4,7 @@ import { getAllBookings } from '../utils/api';
 
 export default function Bookings() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [bookingsPerPage] = useState(2);
+  const [bookingsPerPage] = useState(5);
   const [searchValue, setSearchValue] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [bookings, setBookings] = useState([]);
@@ -15,7 +15,7 @@ export default function Bookings() {
     async function get() {
       setLoading(true);
       const data = await getAllBookings(token);
-      setBookings(data?.bookings);
+     setBookings(data?.bookings);
       setLoading(false);
     }
     get();
@@ -90,9 +90,9 @@ export default function Bookings() {
           </button>
           <button
             className={`${
-              filterStatus === 'rejected' ? 'border-b-2 border-orange-500' : ''
+              filterStatus === 'REJECTED' ? 'border-b-2 border-orange-500' : ''
             } mx-2`}
-            onClick={() => setFilterStatus('rejected')}
+            onClick={() => setFilterStatus('REJECTED')}
           >
             Rejected
           </button>
@@ -117,9 +117,9 @@ export default function Bookings() {
             {currentBookings.map((booking, index) => (
               <tr className='border-b  border-gray-300 text-center' key={index}>
                 <td className='py-8 font-bold'>{booking.userId}</td>
-                <td className='py-8'>{booking.created_at}</td>
-                <td className='py-8'>{booking.dateToCome}</td>
-                <td className='py-8'>{booking.dateToLeave}</td>
+                <td className='py-8'>{booking.created_at.split('T')[0]}</td>
+                <td className='py-8'>{booking.dateToCome.split('T')[0]}</td>
+                <td className='py-8'>{booking.dateToLeave.split('T')[0]}</td>
                 <td className='py-8'>{booking.roomId}</td>
                 <td className='py-8'>{booking.status}</td>
               </tr>

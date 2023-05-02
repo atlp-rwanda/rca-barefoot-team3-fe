@@ -1,6 +1,7 @@
-import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './messageSlice';
-import {register,verify} from '../utils/api';
+import { register, verify } from '../utils/api';
+
 const initialState = {
   isAuthenticated: false,
   token: null,
@@ -62,8 +63,6 @@ export const verifyUser = createAsyncThunk(
     }
   },
 );
-
-
 
 export const { setToken, setAuthenticated } = authSlice.actions;
 export default authSlice.reducer;

@@ -13,7 +13,6 @@ import { login } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
-
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -33,7 +32,6 @@ export default function Login() {
       dispatch(setAuthenticated(true));
     }
     setSubmitting(false);
-
   };
 
   return (
@@ -44,12 +42,12 @@ export default function Login() {
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
             <Link to="/register">
 
-            <p>
-              Don't have an account?
-              <span className="text-orange-dark font-semibold ml-1">
-                Sign Up
-              </span>
-            </p>
+              <p>
+                Don't have an account?
+                <span className="text-orange-dark font-semibold ml-1">
+                  Sign Up
+                </span>
+              </p>
             </Link>
           </div>
           <div>
