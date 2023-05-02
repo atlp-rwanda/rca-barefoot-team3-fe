@@ -1,9 +1,9 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import Cookies from "js-cookie";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
-const apiUrl = 'http://localhost:8000/api/v1';
+const apiUrl = "http://localhost:8000/api/v1";
 
 export const login = async (email, password) => {
   try {
@@ -12,11 +12,38 @@ export const login = async (email, password) => {
       password,
     });
     const { token } = response.data;
-    Cookies.set('token', token);
-    toast.success('You have been successfully authenticated!');
+    Cookies.set("token", token);
+    toast.success("You have been successfully authenticated!");
     return token;
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
+    return null;
+  }
+};
+
+export const initiateResetPassword = async (email) => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/users/initiate-reset-password`,
+      {
+        email,
+      }
+    );
+    console.log(response.data.message);
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || "Something went wrong!");
+    return null;
+  }
+};
+
+export const ResetPassword = async (data) => {
+  try {
+    const response = await axios.post(`${apiUrl}/users/reset-password`, data);
+    console.log(response);
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || "Something went wrong!");
     return null;
   }
 };
