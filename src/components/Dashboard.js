@@ -1,6 +1,7 @@
 import React from 'react'
 import HotelCard from './HotelCard'
 import Accomodations from './Accomodations'
+import BookingsPage from '../views/BookingsTable'
 
 export default function Dashboard() {
     return (
@@ -48,6 +49,15 @@ export default function Dashboard() {
                                         <span className="ml-3">Accomodations</span>
                                     </a>
                                 </div>
+                                <div className="space-y-2 pt-2">
+                                    <a href="/bookings"  className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
+                                        <svg className="w-6 h-6  transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                                        </svg>
+                                        <span className="ml-3">Bookings</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +66,7 @@ export default function Dashboard() {
                 <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
                     <main>
                         <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-                            <Accomodations />
+                            <BookingsPage />
                         </div>
                     </main>
                 </div>
