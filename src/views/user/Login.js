@@ -8,10 +8,36 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
-import { login } from '../../utils/api';
+import Button from '../../components/Button';
+import { login, loginWithFacebook } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
+
+function LoginWithFacebook() {
+  const dispatch = useDispatch();
+
+  const responseFacebook = async (response) => {
+    if (response.accessToken) {
+      const token = await loginWithFacebook(response.accessToken);
+      if (token) {
+        dispatch(setToken(token));
+        dispatch(setAuthenticated(true));
+      }
+    }
+  };
+
+  return (
+    <FacebookLogin
+      appId="880261419941182"
+      fields="name,email,picture"
+      callback={responseFacebook}
+      icon="fa-facebook"
+    />
+  );
+}
+
 export default function Login() {
   const dispatch = useDispatch();
   const initialValues = {
@@ -88,18 +114,21 @@ export default function Login() {
                       className="mt-2 text-red"
                     />
                   </div>
-                  <button
+                  {/* <button
                     type="submit"
                     disabled={isSubmitting}
                     className="my-2 w-full h-14 button-primary"
                   >
                     Submit
-                  </button>
+                  </button> */}
+
+                  <Button handleClick={() => console.log('Form submitted!')} text="Submit" type="submit" disabled={isSubmitting} className="my-2 w-full h-14 button-primary" />
                 </Form>
               )}
             </Formik>
-            <SocialButton icon={<FcGoogle />} text="Sign in with Google" />
-            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" />
+            <SocialButton icon={<FcGoogle />} text="Sign in with Google" handleClick={() => console.log('Google login clicked!')} />
+            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" handleClick={() => console.log('Facebook login clicked!')} />
+            <LoginWithFacebook icon={<GrFacebook />} />
           </div>
         </div>
         <div className=" bg-black w-6/12">

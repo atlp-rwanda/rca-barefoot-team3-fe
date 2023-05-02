@@ -36,6 +36,28 @@ const login = async (email, password) => {
   }
 };
 
+export async function loginWithFacebook(accessToken) {
+  try {
+    const response = await fetch('/api/auth/facebook', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessToken }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.token;
+    }
+    const error = await response.text();
+    throw new Error(error);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
