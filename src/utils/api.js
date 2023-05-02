@@ -25,7 +25,6 @@ const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
   return response.data;
-}
+};
 
-
-export { login, getAllAccomodations }
+export { login, getAllAccomodations };
