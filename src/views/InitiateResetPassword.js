@@ -1,16 +1,14 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { initiateResetPassword} from '../utils/api';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles
 
 export default function InitiateResetPassword() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [submittingMode, setSubmittingMode] = useState(false);
   const initialValues = {
     email: '',
   }
@@ -19,13 +17,12 @@ export default function InitiateResetPassword() {
     .email('This is not a valid email.')
     .required('Email is required!'),
   });
-  const onSubmit = async (values, {submittingMode}) => {
+  const onSubmit = async (values) => {
     if(initiateResetPassword(values)){
-      toast.success("Check your email for the reset password link");
-      // setSubmittingMode(false);
-      setTimeout(() => {navigate("/check-email")}, 2000);
+      toast.success('Check your email for the reset password link');
+      setTimeout(() => {navigate('/check-email')}, 2000);
     }else{
-      toast.error("Something went wrong");
+      toast.error('Something went wrong');
     }
   }
   return (
@@ -68,7 +65,6 @@ export default function InitiateResetPassword() {
                 </div>
                 <button
                   type="submit"
-                  // disabled={submittingMode}
                   className="my-2 w-full h-14 button-primary"
                 >
                   Submit

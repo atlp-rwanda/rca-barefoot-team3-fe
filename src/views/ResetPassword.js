@@ -1,29 +1,28 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import React, { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import * as Yup from "yup";
-import { resetPassword } from "../utils/api";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import the styles
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import * as Yup from 'yup';
+import { resetPassword } from '../utils/api';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the styles
 
 export default function ResetPassword() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  console.log("email ", searchParams.get("email"));
-  const email = searchParams.get("email");
+  const email = searchParams.get('email');
   const initialValues = {
-    currentPassword: "",
-    newPassword: "",
+    currentPassword: '',
+    newPassword: '',
   };
   const validationSchema = Yup.object().shape({
-    currentPassword: Yup.string().required("Current password is required!"),
-    newPassword: Yup.string().required("New password is required!"),
+    currentPassword: Yup.string().required('Current password is required!'),
+    newPassword: Yup.string().required('New password is required!'),
   });
   const onSubmit = async (values) => {
     if (resetPassword(values, email)) {
-      toast.success("Password reset successfully");
+      toast.success('Password reset successfully');
       setTimeout(() => {
-        navigate("/login");
+        navigate('/login');
       }, 10000);
     }
   };
