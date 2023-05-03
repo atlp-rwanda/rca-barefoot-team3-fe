@@ -11,8 +11,10 @@ import SocialButton from '../../components/SocialButton';
 import { login } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -84,6 +86,14 @@ export default function Login() {
                       component="div"
                       className="mt-2 text-red"
                     />
+                  </div>
+                  <div className='flex justify-between text-sm '>
+                    <div className='flex gap-2 text-sm text-gray-300'>
+                      <input type='checkbox'/>
+                    <p>Remember me?</p>
+                    </div>
+                   
+                    <p onClick={()=>{navigate('/initiate-reset-password')}} className='cursor-pointer'>Forgot Password</p>
                   </div>
                   <button
                     type="submit"
