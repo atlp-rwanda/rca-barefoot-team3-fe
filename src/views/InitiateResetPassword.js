@@ -1,4 +1,4 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 import React from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -22,8 +22,11 @@ export default function InitiateResetPassword() {
 
       toast.success('Check your email for the reset password link');
       setTimeout(() => {navigate('/check-email')}, 2000);
+
     } else {
+
       toast.error('Something went wrong');
+
     }
 
   }
@@ -53,11 +56,11 @@ export default function InitiateResetPassword() {
                     Email address
                   </p>
                   <Field
-                      name="email"
-                      component="input"
-                      type="text"
-                      placeholder="Enter your email address"
-                      className="border border  font-light w-full p-3"
+                    name="email"
+                    component="input"
+                    type="text"
+                    placeholder="Enter your email address"
+                    className="border border  font-light w-full p-3"
                   />
                    <ErrorMessage
                       name="email"
@@ -71,11 +74,11 @@ export default function InitiateResetPassword() {
                 >
                   Submit
                 </button>
-              </Form>
-            </Formik>
-          </div>
-        </div>
+          </Form>
+        </Formik>
       </div>
+    </div>
+  </div>
       <ToastContainer
           position="top-right"
           autoClose={5000}

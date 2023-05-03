@@ -11,7 +11,6 @@ import CheckEmailDialogPage from './views/CheckEmailDialogPage';
 import ResetPassword from './views/ResetPassword';
 import Dashboard from './components/Dashboard';
 
-
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {

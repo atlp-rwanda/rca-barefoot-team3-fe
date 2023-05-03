@@ -1,17 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
 import { login, loginWithFacebook } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
 
 function LoginWithFacebook() {
   const dispatch = useDispatch();
@@ -139,13 +138,11 @@ export default function Login() {
             </Formik>
             <SocialButton
               icon={<FcGoogle />}
-              text="Sign in with Google"
-              handleClick={() => console.log("Google login clicked!")}
+              text='Sign in with Google'
             />
             <SocialButton
               icon={<GrFacebook />}
-              text="Sign in with Facebook"
-              handleClick={() => console.log("Facebook login clicked!")}
+              text='Sign in with Facebook'
             />
             <LoginWithFacebook icon={<GrFacebook />} />
           </div>
@@ -159,7 +156,7 @@ export default function Login() {
         </div>
       </div>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -168,7 +165,7 @@ export default function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme='colored'
       />
     </div>
   );

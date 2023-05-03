@@ -42,9 +42,8 @@ export const initiateResetPassword = async (email) => {
       `${apiUrl}/users/initiate-reset-password`,
       {
         email,
-      }
+      },
     );
-    console.log(response.data.message);
     return true;
   } catch (error) {
     toast.error(error.response.data.errors || 'Something went wrong!');
@@ -82,7 +81,6 @@ export async function loginWithFacebook(accessToken) {
     const error = await response.text();
     throw new Error(error);
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
