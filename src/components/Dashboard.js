@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Accomodations from './Accomodations';
 import Bookings from './Bookings';
-
+import Rooms from './Rooms';
 export default function Dashboard() {
   const { token } = useSelector((state) => state.auth);
 
@@ -13,6 +13,7 @@ export default function Dashboard() {
     { name: 'Dashboard', path: '/' },
     { name: 'Accommodations', path: '/accommodations' },
     { name: 'Bookings', path: '/bookings' },
+    {name:"Rooms",path:'/rooms'},
   ];
   const navigate = useNavigate();
 
@@ -72,6 +73,8 @@ export default function Dashboard() {
             <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
               {activeLink === '/accommodations' && <Accomodations />}
               {activeLink === '/bookings' && <Bookings />}
+              {activeLink === '/rooms' && <Rooms/>}
+
             </div>
           </main>
         </div>

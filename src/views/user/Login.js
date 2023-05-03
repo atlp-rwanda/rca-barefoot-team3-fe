@@ -43,7 +43,8 @@ export default function Login() {
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
             <Link to="/register">
 
-              <p>Don't have an account?
+              <p>
+                Don't have an account?
                 <span className="text-orange-dark font-semibold ml-1">
                   Sign Up
                 </span>

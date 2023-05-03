@@ -72,6 +72,12 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
+const getAllRooms = async () => {
+  const response = await axios.get(`${apiUrl}/rooms`);
+  console.log("here",response.data)
+
+  return response.data;
+};
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,
+  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms
 };

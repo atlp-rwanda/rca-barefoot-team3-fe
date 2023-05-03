@@ -7,52 +7,15 @@ export default function Bookings() {
   const [bookingsPerPage] = useState(5);
   const [searchValue, setSearchValue] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  // const [bookings, setBookings] = useState([]);
+   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useSelector((state) => state.auth);
-  const bookings = [
-    {
-      userId: 'Izere Kerie', dateToCome: '2023-05-02', dateToLeave: '2023-05-06', status: 'OPEN', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Shallon ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'APPROVED', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'ACCEPTED', created_at: '2023-05-02', roomId: 2,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-07-03', dateToLeave: '2023-07-06', status: 'REJECTED', created_at: '2023-05-02', roomId: 2,
-    },
-    {
-      userId: 'Izere Kerie', dateToCome: '2023-05-02', dateToLeave: '2023-05-06', status: 'OPEN', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Shallon ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'APPROVED', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'ACCEPTED', created_at: '2023-05-02', roomId: 2,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-07-03', dateToLeave: '2023-07-06', status: 'REJECTED', created_at: '2023-05-02', roomId: 2,
-    },
-    {
-      userId: 'Izere Kerie', dateToCome: '2023-05-02', dateToLeave: '2023-05-06', status: 'OPEN', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Shallon ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'APPROVED', created_at: '2023-05-02', roomId: 1,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-05-03', dateToLeave: '2023-05-06', status: 'ACCEPTED', created_at: '2023-05-02', roomId: 2,
-    },
-    {
-      userId: 'Tracy ', dateToCome: '2023-07-03', dateToLeave: '2023-07-06', status: 'REJECTED', created_at: '2023-05-02', roomId: 2,
-    },
-  ];
+  
   useEffect(() => {
     async function get() {
       setLoading(true);
-      // const data = await getAllBookings(token);
-      // setBookings(data?.bookings);
+       const data = await getAllBookings(token);
+      setBookings(data?.bookings);
       setLoading(false);
     }
     get();
