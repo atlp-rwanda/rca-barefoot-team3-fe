@@ -13,13 +13,28 @@ const login = async (email, password) => {
     });
     const { token } = response.data;
     Cookies.set('token', token);
+    console.log(response);
     toast.success('You have been successfully authenticated!');
     return token;
   } catch (error) {
+    console.log(error);
     toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
   }
 };
+
+const logout = async () => {
+  try {
+    await axios.post(`${apiUrl}/users/logout`, null, {
+      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+    });
+    Cookies.remove('token');
+    window.location.reload(); 
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 export async function loginWithFacebook(accessToken) {
   try {
@@ -47,7 +62,6 @@ const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
   return response.data;
-}
+};
 
-
-export { login, getAllAccomodations }
+export { login, logout, getAllAccomodations };
