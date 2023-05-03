@@ -17,12 +17,15 @@ export default function InitiateResetPassword() {
       .required('Email is required!'),
   });
   const onSubmit = async (values) => {
-    if(initiateResetPassword(values)){
+
+    if (initiateResetPassword(values)) {
+
       toast.success('Check your email for the reset password link');
       setTimeout(() => {navigate('/check-email')}, 2000);
     } else {
       toast.error('Something went wrong');
     }
+
   }
   return (
     <div className=" flex justify-center w-full h-screen bg-orange-light ">
@@ -50,11 +53,11 @@ export default function InitiateResetPassword() {
                     Email address
                   </p>
                   <Field
-                    name="email"
-                    component="input"
-                    type="text"
-                    placeholder="Enter your email address"
-                    className="border border  font-light w-full p-3"
+                      name="email"
+                      component="input"
+                      type="text"
+                      placeholder="Enter your email address"
+                      className="border border  font-light w-full p-3"
                   />
                    <ErrorMessage
                       name="email"
