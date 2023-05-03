@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify'; // Import the toast module
-import { verifyUser } from '../../redux/authslice';
+import { verify } from '../slices/auth';
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles
 
 function Verify() {
@@ -31,7 +31,7 @@ function Verify() {
     const code = Number(inputValues.code);
     const { email } = inputValues;
     console.log('coode', code);
-    await dispatch(verifyUser({ code, email }))
+    await dispatch(verify({ code, email }))
       .unwrap()
       .then(() => {
         toast.success('Verification successful!', {

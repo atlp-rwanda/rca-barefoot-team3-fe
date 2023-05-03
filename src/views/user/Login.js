@@ -6,7 +6,6 @@ import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
@@ -66,15 +65,12 @@ export default function Login() {
         <div className="w-8/12 md:w-6/12 bg-white p-16 ">
           <div>
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
-            <Link to="/register">
-
-              <p>
-                Don't have an account?
-                <span className="text-orange-dark font-semibold ml-1">
-                  Sign Up
-                </span>
-              </p>
-            </Link>
+            <p>
+              Dont have an account?
+              <span className="text-orange-dark font-semibold ml-1">
+                Sign Up
+              </span>
+            </p>
           </div>
           <div>
             <Formik
@@ -87,7 +83,7 @@ export default function Login() {
                   <div className="py-4">
                     <p className="my-4 text-grey-dark ">Email Address</p>
                     <Field
-                      className="border text-sm w-full p-3"
+                      className="border border text-sm w-full p-3"
                       name="email"
                       component="input"
                       type="text"
@@ -102,7 +98,7 @@ export default function Login() {
                   <div className="pb-4 ">
                     <p className="my-4 text-grey-dark ">Password</p>
                     <Field
-                      className="border text-sm  w-full p-3"
+                      className="border border text-sm  w-full p-3"
                       name="password"
                       component="input"
                       type="password"
