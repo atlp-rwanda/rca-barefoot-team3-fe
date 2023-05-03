@@ -40,14 +40,14 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("This is not a valid email.")
-      .required("Email is required!"),
-    password: Yup.string().required("Password is required!"),
+      .email('This is not a valid email.')
+      .required('Email is required!'),
+    password: Yup.string().required('Password is required!'),
   });
 
   const onSubmit = async (values, { setSubmitting }) => {

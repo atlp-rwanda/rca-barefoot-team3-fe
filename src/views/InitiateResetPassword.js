@@ -1,27 +1,26 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import * as Yup from 'yup';
-import { initiateResetPassword} from '../utils/api';
 import { useNavigate } from 'react-router-dom';
-import {toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { initiateResetPassword } from '../utils/api';
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles
 
 export default function InitiateResetPassword() {
   const navigate = useNavigate();
   const initialValues = {
     email: '',
-  }
+  };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-    .email('This is not a valid email.')
-    .required('Email is required!'),
+      .email('This is not a valid email.')
+      .required('Email is required!'),
   });
   const onSubmit = async (values) => {
     if(initiateResetPassword(values)){
       toast.success('Check your email for the reset password link');
       setTimeout(() => {navigate('/check-email')}, 2000);
-    }else{
+    } else {
       toast.error('Something went wrong');
     }
   }
@@ -41,9 +40,9 @@ export default function InitiateResetPassword() {
           </div>
           <div className=" w-2/3 ">
             <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
             >
               <Form>
                 <div className="py-4">
@@ -75,16 +74,16 @@ export default function InitiateResetPassword() {
         </div>
       </div>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
       />
     </div>
   );

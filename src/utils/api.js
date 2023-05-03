@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 const apiUrl = 'http://localhost:8000/api/v1';
 
-
 const register = (
   first_name,
   last_name,
@@ -55,7 +54,7 @@ export const initiateResetPassword = async (email) => {
 
 export const resetPassword = async (data, email) => {
   try {
-    const response = await axios.post(`${apiUrl}/users/reset-password`, {
+    await axios.post(`${apiUrl}/users/reset-password`, {
       email,
       ...data,
     });

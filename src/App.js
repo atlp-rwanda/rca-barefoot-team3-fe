@@ -8,7 +8,7 @@ import Verify from './views/user/Verify';
 import { setToken, setAuthenticated } from './redux/authslice';
 import InitiateResetPassword from './views/InitiateResetPassword';
 import CheckEmailDialogPage from './views/CheckEmailDialogPage';
-import ResetPassword from './views/ResetPassword'
+import ResetPassword from './views/ResetPassword';
 import Dashboard from './components/Dashboard';
 
 
