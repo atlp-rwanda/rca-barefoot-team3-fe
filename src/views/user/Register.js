@@ -7,8 +7,7 @@ import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import * as Yup from 'yup';
-import Button from '../components/Button';
-import { register } from '../slices/auth';
+import { registerUser } from '../../redux/authslice';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -77,7 +76,7 @@ export default function Register() {
     } = formValue;
     console.log(formValue);
 
-    await dispatch(register({
+    await dispatch(registerUser({
       first_name, last_name, gender, password, password_confirmation, username, email,
     }))
       .unwrap()
@@ -272,13 +271,7 @@ export default function Register() {
                       className="text-red"
                     />
                   </div>
-                  {/* <button type="submit" className="   my-2
-                  w-full button-primary">Sign Up</button> */}
-                  <Button
-                    handleClick={() => console.log('Button clicked!')}
-                    text="Sign Up"
-                    className="my-2 w-full button-primary"
-                  />
+                  <button type="submit" className="   my-2 w-full button-primary">Sign Up</button>
                 </div>
               </Form>
             )}
