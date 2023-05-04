@@ -27,7 +27,7 @@ const login = async (email, password) => {
       email,
       password,
     });
-    localStorage.setItem("user",response.data)
+    localStorage.setItem("user",response.data.userId)
     const { token } = response.data;
     Cookies.set('token', token);
     toast.success('You have been successfully authenticated!');
@@ -83,8 +83,7 @@ const getAllRooms = async () => {
 const addBooking = async (id,data) => {
  await axios
     .post(`${apiUrl}/booking/${id}`, {
-      dateToCome,
-      dateToLeave,
+      data,
     })
     .then((response) => {
       console.log(response.data);
