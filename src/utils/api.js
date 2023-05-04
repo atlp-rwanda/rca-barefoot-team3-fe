@@ -50,6 +50,34 @@ const logout = async () => {
   } catch (error) {
     console.error(error);
   }
+}
+
+export const initiateResetPassword = async (email) => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/users/initiate-reset-password`,
+      {
+        email,
+      },
+    );
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+    return null;
+  }
+};
+
+export const resetPassword = async (data, email) => {
+  try {
+    await axios.post(`${apiUrl}/users/reset-password`, {
+      email,
+      ...data,
+    });
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+    return null;
+  }
 };
 
 export async function loginWithFacebook(accessToken) {
@@ -69,7 +97,6 @@ export async function loginWithFacebook(accessToken) {
     const error = await response.text();
     throw new Error(error);
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
@@ -87,6 +114,7 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
+
 export {
   login, getAllAccomodations, logout, register, verify, getAllBookings,
 };
