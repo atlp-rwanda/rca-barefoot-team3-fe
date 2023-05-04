@@ -69,7 +69,7 @@ export default function Login() {
             <Link to="/register">
 
               <p>
-                Don't have an account?
+                Don&apos;t have an account?
                 <span className="text-orange-dark font-semibold ml-1">
                   Sign Up
                 </span>
