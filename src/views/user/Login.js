@@ -1,16 +1,13 @@
 import React from 'react';
-import {
-  Formik, Field, Form, ErrorMessage,
-} from 'formik';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
-import Button from '../../components/Button';
 import { login, loginWithFacebook } from '../../utils/api';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,6 +36,7 @@ function LoginWithFacebook() {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -67,7 +65,6 @@ export default function Login() {
           <div>
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
             <Link to="/register">
-
               <p>
                 Don't have an account?
                 <span className="text-orange-dark font-semibold ml-1">
@@ -114,20 +111,39 @@ export default function Login() {
                       className="mt-2 text-red"
                     />
                   </div>
-                  {/* <button
+                  <div className="flex justify-between text-sm ">
+                    <div className="flex gap-2 text-sm text-gray-300">
+                      <input type="checkbox" />
+                      <p>Remember me?</p>
+                    </div>
+
+                    <p
+                      onClick={() => {
+                        navigate("/initiate-reset-password");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      Forgot Password
+                    </p>
+                  </div>
+                  <button
                     type="submit"
                     disabled={isSubmitting}
                     className="my-2 w-full h-14 button-primary"
                   >
                     Submit
-                  </button> */}
-
-                  <Button handleClick={() => console.log('Form submitted!')} text="Submit" type="submit" disabled={isSubmitting} className="my-2 w-full h-14 button-primary" />
+                  </button>
                 </Form>
               )}
             </Formik>
-            <SocialButton icon={<FcGoogle />} text="Sign in with Google" handleClick={() => console.log('Google login clicked!')} />
-            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" handleClick={() => console.log('Facebook login clicked!')} />
+            <SocialButton
+              icon={<FcGoogle />}
+              text='Sign in with Google'
+            />
+            <SocialButton
+              icon={<GrFacebook />}
+              text='Sign in with Facebook'
+            />
             <LoginWithFacebook icon={<GrFacebook />} />
           </div>
         </div>
@@ -140,7 +156,7 @@ export default function Login() {
         </div>
       </div>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -149,7 +165,7 @@ export default function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme='colored'
       />
     </div>
   );
