@@ -72,6 +72,41 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
+const getAccomodation = async (id) => {
+  const response = await axios.get(`${apiUrl}/accommodations/${id}`);
+  return response.data;
+};
+const deleteAccomodation = async (id) => {
+  const token = Cookies.get('token');
+  try {
+    await axios.delete(`${apiUrl}/accommodations/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success('Accomodation deleted successfully!');
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+  }
+};
+const updateAccomodation = async (id, data) => {
+  const token = Cookies.get('token');
+  try {
+    await axios.put(`${apiUrl}/accommodations/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success('Accomodation updated successfully!');
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+  }
+};
+const getAllRooms = async () => {
+  const response = await axios.get(`${apiUrl}/rooms/`);
+  return response.data;
+};
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,
+  login, getAllAccomodations, register, verify, getAllBookings, getAccomodation,
+  deleteAccomodation, updateAccomodation, getAllRooms,
 };

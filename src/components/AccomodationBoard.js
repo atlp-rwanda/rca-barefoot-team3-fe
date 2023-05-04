@@ -2,9 +2,11 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import AccomodationCard from './AccomodationCard';
+import {
+  getAllAccomodations, getAllBookings, getAllRooms, deleteAccomodation,
+} from '../utils/api';
 
 export default function AccomodationBoard() {
   const [loading, setLoading] = useState(true);
@@ -14,13 +16,9 @@ export default function AccomodationBoard() {
   const fetchData = async () => {
     try {
       const token = Cookies.get('token');
-      const response = await axios.get('http://localhost:8000/api/v1/accommodations/');
-      const roomresponse = await axios.get('http://localhost:8000/api/v1/rooms/');
-      const bookingresponse = await axios.get('http://localhost:8000/api/v1/booking/all', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await getAllAccomodations();
+      const roomresponse = await getAllRooms();
+      const bookingresponse = await getAllBookings(token);
       setData(response.data.accommodations);
       setRooms(roomresponse.data.rooms);
       setBookings(bookingresponse.data.bookings);
@@ -30,13 +28,8 @@ export default function AccomodationBoard() {
     setLoading(false);
   };
   const DeleteAccomodation = async (id) => {
-    const token = Cookies.get('token');
     try {
-      await axios.delete(`http://localhost:8000/api/v1/accommodations/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await deleteAccomodation(id);
       fetchData();
     } catch (error) {
       console.error(error);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AccomodationCard({
   name, province, district, type, bookedRooms, availableRooms, onClick, id,
@@ -58,7 +59,7 @@ export default function AccomodationCard({
         <div className=" bg-[#1976D2] h-[30px] cursor-pointer w-[70px] flex justify-center overflow-hidden items-center
          rounded-[3px]"
         >
-          <span className="text-white"> Edit</span>
+          <span className="text-white"><Link to={`/editaccomodation/${id}`}> Edit</Link></span>
         </div>
         <button
           className=" bg-[#FF0202] h-[30px] cursor-pointer w-[80px] flex justify-center overflow-hidden items-center
