@@ -27,6 +27,7 @@ const login = async (email, password) => {
       email,
       password,
     });
+    localStorage.setItem("user",response.data)
     const { token } = response.data;
     Cookies.set('token', token);
     toast.success('You have been successfully authenticated!');
@@ -79,27 +80,19 @@ const getAllRooms = async () => {
   return response.data;
 };
 
-const addBooking = async (event) => {
-  event.preventDefault();
-  setError("");
-  setSuccessMessage("");
-  try {
-    const response = await axios.post(`${apiUrl}/booking/${roomId}`, {
+const addBooking = async (id,data) => {
+ await axios
+    .post(`${apiUrl}/booking/${id}`, {
       dateToCome,
       dateToLeave,
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-    setSuccessMessage(response.data.message);
-    setDateToCome("");
-    setDateToLeave("");
-  } catch (error) {
-    if (error.response && error.response.data) {
-      setError(error.response.data.error);
-    } else {
-      setError("Server error");
-    }
-  }
 };
-
 export {
   login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,addBooking
 };
