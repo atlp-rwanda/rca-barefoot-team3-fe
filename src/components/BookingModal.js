@@ -1,9 +1,11 @@
 import React from "react";
-
-export default function BookingModal() {
+import { apiUrl } from "../utils/api";
+export default function BookingModal({roomId}) {
   const [showModal, setShowModal] = React.useState(false);
-  const [dateToCome, setCheckIn] = React.useState("");
-  const [dateToLeave, setCheckOut] = React.useState("");
+  const [dateToCome, setDateToCome] = useState("");
+  const [dateToLeave, setDateToLeave] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleCheckInChange = (event) => {
     setCheckIn(event.target.value);
@@ -13,22 +15,26 @@ export default function BookingModal() {
     setCheckOut(event.target.value);
   };
 
-  const handleSubmit = (event, id) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post(`/api/v1/booking/${id}`, {
+    setError("");
+    setSuccessMessage("");
+    try {
+      const response = await axios.post(`${apiUrl}/booking/${roomId}`, {
         dateToCome,
         dateToLeave,
-      })
-      .then((response) => {
-        console.log(response.data);
-        setShowModal(false);
-      })
-      .catch((error) => {
-        console.log(error);
       });
+      setSuccessMessage(response.data.message);
+      setDateToCome("");
+      setDateToLeave("");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setError(error.response.data.error);
+      } else {
+        setError("Server error");
+      }
+    }
   };
-  
   
   return (
     <>
@@ -71,10 +77,10 @@ export default function BookingModal() {
                       Check-in Date
                     </label>
                     <input
-                      type="date"
-                      id="check-in-date"
-                      value={dateToCome}
-                      onChange={handleCheckInChange}
+                    type="date"
+                    id="dateToCome"
+                    value={dateToCome}
+                    onChange={(event) => setDateToCome(event.target.value)}
                       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
@@ -86,10 +92,10 @@ export default function BookingModal() {
                       Check-out Date
                     </label>
                     <input
-                      type="date"
-                      id="check-out-date"
-                      value={dateToLeave}
-                      onChange={handleCheckOutChange}
+                    type="date"
+                    id="dateToCome"
+                    value={dateToCome}
+                    onChange={(event) => setDateToCome(event.target.value)}
                       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
@@ -105,7 +111,7 @@ export default function BookingModal() {
                   </button>
                   <button
                     className="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
+                    type="submit"
                     onClick={() => setShowModal(false)}
                   >
                     Save 

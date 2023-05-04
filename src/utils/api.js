@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-const apiUrl = 'http://localhost:8000/api/v1';
+const apiUrl = 'http://localhost:3000/api/v1';
 
 const register = (
   first_name,
@@ -78,6 +78,8 @@ const getAllRooms = async () => {
 
   return response.data;
 };
+
+
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms
+  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,apiUrl
 };
