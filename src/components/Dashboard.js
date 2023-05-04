@@ -15,13 +15,13 @@ export default function Dashboard() {
     { name: 'Bookings', path: '/bookings' },
     {name:"Rooms",path:'/rooms'},
   ];
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
-  console.log('token:', token);
+//   console.log('token:', token);
 
-  if (!token) {
-    navigate('/login');
-  }
+//   if (!token) {
+//     navigate('/login');
+//   }
 
   return (
     <div>
