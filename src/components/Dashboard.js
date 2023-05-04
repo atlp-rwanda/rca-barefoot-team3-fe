@@ -3,19 +3,6 @@ import HotelCard from './HotelCard';
 import Accomodations from './Accomodations';
 import { logout } from '../utils/api';
 
-// function logout() {
-//   fetch('/logout', { method: 'POST' })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (data.token === null) {
-//         localStorage.removeItem('token');
-//         window.location.href = '/login';
-//       } else {
-//         console.error('Logout failed:', data.message);
-//       }
-//     })
-//     .catch((error) => console.error('Logout failed:', error));
-// }
 
 export default function Dashboard() {
   return (
