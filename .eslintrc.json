@@ -4,14 +4,18 @@
       "jest": true,
       "node": true
     },
+      "parser": "@babel/eslint-parser",
       "extends": ["airbnb", "plugin:react-hooks/recommended", "plugin:storybook/recommended"],
       "plugins": ["import", "jsx-a11y", "react",  "react-hooks", "jest"],
       "rules": {
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
         "import/extensions": ["error", "never"],
         "react/button-has-type": "off",
+        "import/no-named-as-default": 0,
+        "import/no-named-as-default-member": 0,
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
+        "no-restricted-syntax": ["error", "LabeledStatement", "WithStatement"],
         "no-unused-vars": ["error", { "argsIgnorePattern": "^action$" }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
