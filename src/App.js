@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard';
 
 function App() {
   const dispatch = useDispatch();
-  const token = Cookies.get('token');
+
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
