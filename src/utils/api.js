@@ -29,7 +29,7 @@ const logout = async () => {
       headers: { Authorization: `Bearer ${Cookies.get('token')}` },
     });
     Cookies.remove('token');
-    window.location.reload(); 
+    window.location='/';
   } catch (error) {
     console.error(error);
   }

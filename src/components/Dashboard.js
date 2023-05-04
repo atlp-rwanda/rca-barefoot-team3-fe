@@ -1,6 +1,7 @@
 import React from 'react';
 import HotelCard from './HotelCard';
 import Accomodations from './Accomodations';
+import { logout } from '../utils/api';
 
 // function logout() {
 //   fetch('/logout', { method: 'POST' })
@@ -105,13 +106,13 @@ export default function Dashboard() {
                     </a>
                 </div>
                 <div className="mt-40">
-                  <a href="/" className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2">
+                  <div className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2">
                       <svg className="w-6 h-6 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path fillRule="evenodd" d="M11 18v-1a1 1 0 00-1-1H6a3 3 0 01-3-3V7a3 3 0 013-3h4a1 1 0 001-1V3a1 1 0 00-1-1H6A5 5 0 001 7v7a5 5 0 005 5h4a1 1 0 001-1zM19 10a1 1 0 00-1 1v5a3 3 0 01-3 3H6a1 1 0 000 2h9a5 5 0 005-5V11a1 1 0 00-1-1z" clipRule="evenodd" />
                           <path fillRule="evenodd" d="M13 8a1 1 0 00-1 1v4a1 1 0 002 0V9a1 1 0 00-1-1zM7 8a1 1 0 00-1 1v4a1 1 0 002 0V9a1 1 0 00-1-1z" clipRule="evenodd" />
                         </svg>
-                      <button onClick="logout()"><span className="ml-3">Logout</span></button>
-                    </a>
+                      <button onClick={()=>logout()}><span className="ml-3">Logout</span></button>
+                    </div>
                 </div>
               </div>
             </div>
