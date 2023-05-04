@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Accomodations from './Accomodations';
-import Bookings from './Bookings';
+import { Accomodations } from './Accomodations';
+import { Bookings } from './Bookings';
 import { logout } from '../utils/api';
 
 export default function Dashboard() {
