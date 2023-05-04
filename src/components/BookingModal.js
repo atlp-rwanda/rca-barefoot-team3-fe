@@ -1,5 +1,6 @@
 import React from "react";
-import { apiUrl } from "../utils/api";
+import { apiUrl,addBooking } from "../utils/api";
+
 export default function BookingModal({roomId}) {
   const [showModal, setShowModal] = React.useState(false);
   const [dateToCome, setDateToCome] = useState("");
@@ -15,27 +16,7 @@ export default function BookingModal({roomId}) {
     setCheckOut(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("");
-    setSuccessMessage("");
-    try {
-      const response = await axios.post(`${apiUrl}/booking/${roomId}`, {
-        dateToCome,
-        dateToLeave,
-      });
-      setSuccessMessage(response.data.message);
-      setDateToCome("");
-      setDateToLeave("");
-    } catch (error) {
-      if (error.response && error.response.data) {
-        setError(error.response.data.error);
-      } else {
-        setError("Server error");
-      }
-    }
-  };
-  
+
   return (
     <>
       <button
@@ -68,7 +49,7 @@ export default function BookingModal({roomId}) {
                   </button>
                 </div>
                 {/*body*/}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={addBooking}>
                   <div className="relative p-6 flex-auto">
                     <label
                       htmlFor="check-in-date"

@@ -79,7 +79,27 @@ const getAllRooms = async () => {
   return response.data;
 };
 
+const addBooking = async (event) => {
+  event.preventDefault();
+  setError("");
+  setSuccessMessage("");
+  try {
+    const response = await axios.post(`${apiUrl}/booking/${roomId}`, {
+      dateToCome,
+      dateToLeave,
+    });
+    setSuccessMessage(response.data.message);
+    setDateToCome("");
+    setDateToLeave("");
+  } catch (error) {
+    if (error.response && error.response.data) {
+      setError(error.response.data.error);
+    } else {
+      setError("Server error");
+    }
+  }
+};
 
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,apiUrl
+  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,addBooking
 };
