@@ -1,20 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import { apiUrl } from "../utils/api";
+import { toast, ToastContainer } from 'react-toastify'; // Import the toast module
+
 export default function BookingModal({roomId}) {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [dateToCome, setDateToCome] = useState("");
   const [dateToLeave, setDateToLeave] = useState("");
+  
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  const handleCheckInChange = (event) => {
-    setCheckIn(event.target.value);
-  };
-
-  const handleCheckOutChange = (event) => {
-    setCheckOut(event.target.value);
-  };
-
+   
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
@@ -27,14 +23,35 @@ export default function BookingModal({roomId}) {
       setSuccessMessage(response.data.message);
       setDateToCome("");
       setDateToLeave("");
+      toast.success(successMessage, {
+        position: 'top-right', // Set position to top-right
+        autoClose: 3000, // Auto-close the toast after 3 seconds
+        hideProgressBar: false, // Show progress bar
+        closeOnClick: true, // Close toast on click
+        pauseOnHover: true, // Pause toast on hover
+        draggable: true, // Make toast draggable
+        onClose: () => {
+          // Navigate to /login after toast is closed
+          navigate('/verify');
+        },
+      });
     } catch (error) {
       if (error.response && error.response.data) {
         setError(error.response.data.error);
       } else {
         setError("Server error");
       }
+      toast.error(error, {
+        position: 'top-right', // Set position to top-right
+        autoClose: 3000, // Auto-close the toast after 3 seconds
+        hideProgressBar: false, // Show progress bar
+        closeOnClick: true, // Close toast on click
+        pauseOnHover: true, // Pause toast on hover
+        draggable: true, // Make toast draggable
+        className: 'toast-error', // Add custom class for error toast
+      });
     }
-  };
+    }
   
   return (
     <>
@@ -112,7 +129,7 @@ export default function BookingModal({roomId}) {
                   <button
                     className="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="submit"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleSubmit}
                   >
                     Save 
                   </button>

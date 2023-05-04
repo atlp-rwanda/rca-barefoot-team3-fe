@@ -1,11 +1,10 @@
 import React ,{useEffect, useState}from 'react'
 import { getAllRooms } from '../utils/api'
-import SocialButton from './SocialButton';
 import BookingModal from './BookingModal';
 export default function Rooms() {
 
     const [loading, setLoading] = useState(true);
-  
+  const [showModal,setShowModal]=useState(false)
 const [rooms,setRooms]=useState([])
 useEffect(() => {
     async function get() {
@@ -45,8 +44,7 @@ useEffect(() => {
             <td className="py-8">{room.pricing.plans[0].price}</td>
             <td className="py-8">{room.images}</td>
             <td>
-            <button type="submit" className="   my-2  button-primary">Book room</button>
-            <BookingModal/>
+            <BookingModal roomId={room.id}/>
             </td>
           </tr>
         ))}
