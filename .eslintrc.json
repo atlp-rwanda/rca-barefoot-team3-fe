@@ -12,6 +12,7 @@
         "react/button-has-type": "off",
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
+        "import/no-named-as-default": "off",
         "no-unused-vars": ["error", { "argsIgnorePattern": "^action$" }],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
@@ -20,3 +21,4 @@
         "no-param-reassign": "off"
 }
 }
+

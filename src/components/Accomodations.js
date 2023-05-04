@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HotelCard from './HotelCard'
 import { getAllAccomodations } from '../utils/api'
-// import Dashboard from './Dashboard';
+import Dashboard from './Dashboard';
 
 export default function Accomodations() {
 
