@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+
 const apiUrl = 'http://localhost:8000/api/v1';
 
 const register = (
@@ -28,13 +29,28 @@ const login = async (email, password) => {
     });
     const { token } = response.data;
     Cookies.set('token', token);
+    console.log(response);
     toast.success('You have been successfully authenticated!');
     return token;
   } catch (error) {
+    console.log(error);
     toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
   }
 };
+
+const logout = async () => {
+  try {
+    await axios.post(`${apiUrl}/users/logout`, null, {
+      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+    });
+    Cookies.remove('token');
+    console.log('Logged out successfully!');
+    window.location = '/login';
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const initiateResetPassword = async (email) => {
   try {
@@ -98,6 +114,7 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
+
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,
+  login, getAllAccomodations, logout, register, verify, getAllBookings,
 };

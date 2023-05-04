@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
 import { login, loginWithFacebook } from '../../utils/api';
+import Button from '../../components/Button';
 import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -66,7 +67,7 @@ export default function Login() {
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
             <Link to="/register">
               <p>
-                Don't have an account?
+                Don&apos;t have an account?
                 <span className="text-orange-dark font-semibold ml-1">
                   Sign Up
                 </span>
@@ -136,14 +137,8 @@ export default function Login() {
                 </Form>
               )}
             </Formik>
-            <SocialButton
-              icon={<FcGoogle />}
-              text='Sign in with Google'
-            />
-            <SocialButton
-              icon={<GrFacebook />}
-              text='Sign in with Facebook'
-            />
+            <SocialButton icon={<FcGoogle />} text="Sign in with Google" handleClick={() => console.log('Google login clicked!')} />
+            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" handleClick={() => console.log('Facebook login clicked!')} />
             <LoginWithFacebook icon={<GrFacebook />} />
           </div>
         </div>
