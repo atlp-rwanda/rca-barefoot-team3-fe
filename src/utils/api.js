@@ -106,6 +106,21 @@ const getAllAccomodations = async () => {
 
   return response.data;
 };
+
+const searchAccommodations = async (params) => {
+  const response = await axios.get(`${apiUrl}/accommodations/search`, {
+    params
+  });
+
+  return response.data;
+};
+
+const getAccomodationDetails = async (id) => {
+  const response = await axios.get(`${apiUrl}/accommodations/${id}?rooms=1`);
+  return response.data;
+}
+
+
 const getAllBookings = async (token) => {
   const response = await axios.get(`${apiUrl}/booking/all`, {
     headers: {
@@ -116,5 +131,5 @@ const getAllBookings = async (token) => {
 };
 
 export {
-  login, getAllAccomodations, logout, register, verify, getAllBookings,
+  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetails
 };
