@@ -3,9 +3,10 @@ import React from "react"
 import { Input__Date } from "./date";
 import { Input__Select } from "./select";
 
-function InputContainer({ children }){
+function InputContainer({ children, label }){
   return (
     <div className="w-full">
+			<label className="text-[14px] font-[500]">{label}</label>
       {children}
     </div>
   )
