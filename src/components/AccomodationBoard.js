@@ -19,9 +19,9 @@ export default function AccomodationBoard() {
       const response = await getAllAccomodations();
       const roomresponse = await getAllRooms();
       const bookingresponse = await getAllBookings(token);
-      setData(response.data.accommodations);
-      setRooms(roomresponse.data.rooms);
-      setBookings(bookingresponse.data.bookings);
+      setData(response.accommodations);
+      setRooms(roomresponse.rooms);
+      setBookings(bookingresponse.bookings);
     } catch (error) {
       console.error(error);
     }
