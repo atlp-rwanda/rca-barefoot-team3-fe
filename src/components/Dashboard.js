@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   const links = [
     { name: 'Dashboard', path: '/' },
-    { name: 'Accommodations', path: '/accommodations' },
+    { name: 'Accommodations', path: '/accommodation' },
     { name: 'Bookings', path: '/bookings' },
     { name: 'Analytics', path: 'analiytics' },
     { name: 'Settings', path: 'settings' },
