@@ -1,5 +1,5 @@
 import React from "react";
-import { apiUrl,addBooking } from "../utils/api";
+import { addBooking } from "../utils/api";
 
 export default function BookingModal({roomId}) {
   const [showModal, setShowModal] = useState(false);
@@ -9,49 +9,18 @@ export default function BookingModal({roomId}) {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
    
- 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setError("");
-    setSuccessMessage("");
-    try {
-      const response = await axios.post(`${apiUrl}/booking/${roomId}`, {
-        dateToCome,
-        dateToLeave,
+    addBooking(roomId,{dateToCome, dateToLeave})
+      .then(() => {
+        console.log("Booking created successfully!");
+        setShowModal(false);
+      })
+      .catch((error) => {
+        console.log("Error creating booking:", error);
       });
-      setSuccessMessage(response.data.message);
-      setDateToCome("");
-      setDateToLeave("");
-      toast.success(successMessage, {
-        position: 'top-right', // Set position to top-right
-        autoClose: 3000, // Auto-close the toast after 3 seconds
-        hideProgressBar: false, // Show progress bar
-        closeOnClick: true, // Close toast on click
-        pauseOnHover: true, // Pause toast on hover
-        draggable: true, // Make toast draggable
-        onClose: () => {
-          // Navigate to /login after toast is closed
-          navigate('/verify');
-        },
-      });
-    } catch (error) {
-      if (error.response && error.response.data) {
-        setError(error.response.data.error);
-      } else {
-        setError("Server error");
-      }
-      toast.error(error, {
-        position: 'top-right', // Set position to top-right
-        autoClose: 3000, // Auto-close the toast after 3 seconds
-        hideProgressBar: false, // Show progress bar
-        closeOnClick: true, // Close toast on click
-        pauseOnHover: true, // Pause toast on hover
-        draggable: true, // Make toast draggable
-        className: 'toast-error', // Add custom class for error toast
-      });
-    }
-    }
-  
+  };
+
   return (
     <>
       <button
@@ -84,7 +53,7 @@ export default function BookingModal({roomId}) {
                   </button>
                 </div>
                 {/*body*/}
-                <form onSubmit={addBooking}>
+                <form onSubmit={handleSubmit}>
                   <div className="relative p-6 flex-auto">
                     <label
                       htmlFor="check-in-date"
