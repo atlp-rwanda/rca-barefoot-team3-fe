@@ -7,14 +7,16 @@ import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
 import { login } from '../../utils/api';
-import { setToken, setAuthenticated } from '../../redux/authslice';
+import { setToken, setAuthenticated,setLoggedUser } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const initialValues = {
     email: '',
     password: '',
@@ -27,12 +29,15 @@ export default function Login() {
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
-    const token = await login(values.email, values.password);
-    if (token) {
-      dispatch(setToken(token));
+    const data = await login(values.email, values.password);
+    
+    if (data) {
+      dispatch(setToken(data.token));
       dispatch(setAuthenticated(true));
+      dispatch(setLoggedUser(data.user))
     }
     setSubmitting(false);
+    navigate("/admin")
   };
 
   return (

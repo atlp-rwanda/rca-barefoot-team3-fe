@@ -27,11 +27,11 @@ const login = async (email, password) => {
       email,
       password,
     });
-    localStorage.setItem("user",response.data.userId)
-    const { token } = response.data;
-    Cookies.set('token', token);
+    const  data= response.data;
+    Cookies.set('token', data.token);
+   
     toast.success('You have been successfully authenticated!');
-    return token;
+    return data;
   } catch (error) {
     toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
@@ -75,22 +75,26 @@ const getAllBookings = async (token) => {
 };
 const getAllRooms = async () => {
   const response = await axios.get(`${apiUrl}/rooms`);
-  console.log("here",response.data)
 
   return response.data;
 };
 
-const addBooking = async (id,data) => {
- await axios
+const addBooking = async (id,dateToCome,dateToLeave,user,token) => {
+try{
+  await axios
     .post(`${apiUrl}/booking/${id}`, {
-      data,
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      dateToCome,dateToLeave,user
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }})
+   
+      toast.success('Room Booked successfully!');
+    } catch(error){
+      toast.error(error.response.data.errors || 'Something went wrong!');
+
+    }
+    
 };
 export {
   login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,addBooking

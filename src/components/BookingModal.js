@@ -1,28 +1,66 @@
-import React from "react";
+import React,{useState} from "react";
 import { addBooking } from "../utils/api";
+import { useSelector,useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const moment = require('moment');
 
 export default function BookingModal({roomId}) {
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [dateToCome, setDateToCome] = useState("");
   const [dateToLeave, setDateToLeave] = useState("");
-  
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-   
-  const handleSubmit = (event) => {
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    addBooking(roomId,{dateToCome, dateToLeave})
+    
+    // Validate dateToCome string
+    const dateToComeValid = moment(dateToCome, 'YYYY-MM-DD', true).isValid();
+    if (!dateToComeValid) {
+      console.log('Invalid dateToCome:', dateToCome);
+      return;
+    }
+    
+    // Validate dateToLeave string
+    const dateToLeaveValid = moment(dateToCome, 'YYYY-MM-DD', true).isValid();
+    if (!dateToLeaveValid) {
+      console.log('Invalid dateToLeave:', dateToLeave);
+      return;
+    }
+    
+    // Create Date objects from validated date strings
+
+    
+    await addBooking(roomId, dateToCome, dateToLeave, user, token)
       .then(() => {
-        console.log("Booking created successfully!");
+        navigate('/admin');
         setShowModal(false);
       })
       .catch((error) => {
         console.log("Error creating booking:", error);
       });
   };
+  
+  
 
   return (
-    <>
+    <> hellop
+       <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <button
         className="bg-orange-600 text-white active:bg-orange font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
@@ -79,8 +117,8 @@ export default function BookingModal({roomId}) {
                     <input
                     type="date"
                     id="dateToCome"
-                    value={dateToCome}
-                    onChange={(event) => setDateToCome(event.target.value)}
+                    value={dateToLeave}
+                    onChange={(event) => setDateToLeave(event.target.value)}
                       className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
@@ -104,9 +142,12 @@ export default function BookingModal({roomId}) {
                 </div>
               </div>
             </div>
+         
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+         
         </>
+        
       ) : null}
     </>
   );

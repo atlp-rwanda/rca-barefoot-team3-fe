@@ -14,6 +14,7 @@ export default function Bookings() {
   useEffect(() => {
     async function get() {
       setLoading(true);
+      console.log("token",JSON.stringify(token))
        const data = await getAllBookings(token);
       setBookings(data?.bookings);
       setLoading(false);
@@ -26,7 +27,7 @@ export default function Bookings() {
     filteredBookings = bookings.filter((booking) => {
       // Check if the search value matches any property of the booking object
       for (const property in booking) {
-        if (booking.hasOwnProperty(property) && booking[property].toString().toLowerCase().includes(searchValue.toLowerCase())) {
+        if (booking.hasOwnProperty(property) && booking[property] && booking[property].toString().toLowerCase().includes(searchValue.toLowerCase())) {
           return true; // Return true if a match is found
         }
       }
