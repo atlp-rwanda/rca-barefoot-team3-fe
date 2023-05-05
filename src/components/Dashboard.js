@@ -6,9 +6,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Accomodations from './Accomodations';
 import Bookings from './Bookings';
 import { logout } from '../utils/api';
+import AccomodationBoard from './AccomodationBoard';
 
 export default function Dashboard() {
   const { token } = useSelector((state) => state.auth);
@@ -117,7 +117,7 @@ export default function Dashboard() {
         >
           <main>
             <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-              {activeLink === '/accommodations' && <Accomodations />}
+              {activeLink === '/accommodation' && <AccomodationBoard />}
               {activeLink === '/bookings' && <Bookings />}
             </div>
           </main>
