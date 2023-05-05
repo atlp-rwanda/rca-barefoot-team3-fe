@@ -49,8 +49,10 @@ useEffect(() => {
           </tr>
         ))}
         </tbody>
+
         </table>
     
   )}   </div>
+  
        ) 
 }

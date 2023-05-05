@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { apiUrl } from "../utils/api";
 import { toast, ToastContainer } from 'react-toastify'; // Import the toast module
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function BookingModal({roomId}) {
   const [showModal, setShowModal] = useState(false);
@@ -12,6 +13,7 @@ export default function BookingModal({roomId}) {
    
  
   const handleSubmit = async (event) => {
+    console.log("submit")
     event.preventDefault();
     setError("");
     setSuccessMessage("");
@@ -20,7 +22,6 @@ export default function BookingModal({roomId}) {
         dateToCome,
         dateToLeave,
       });
-      console.log("booking")
       setSuccessMessage(response.data.message);
       setDateToCome("");
       setDateToLeave("");
@@ -138,6 +139,8 @@ export default function BookingModal({roomId}) {
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <ToastContainer />
+
         </>
       ) : null}
     </>
