@@ -29,12 +29,12 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/admin" element={<Dashboard />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/verify' element={<Verify />} />
-      <Route path='/initiate-reset-password' element={<InitiateResetPassword />} />
-      <Route path='/check-email' element={<CheckEmailDialogPage />} />
-      <Route path='/reset-password' element={<ResetPassword />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/verify" element={<Verify />} />
+      <Route path="/initiate-reset-password" element={<InitiateResetPassword />} />
+      <Route path="/check-email" element={<CheckEmailDialogPage />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
     </Routes>
   );
 }

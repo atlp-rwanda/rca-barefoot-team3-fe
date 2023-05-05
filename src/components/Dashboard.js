@@ -5,6 +5,7 @@ import Accomodations from './Accomodations';
 import Bookings from './Bookings';
 import { logout } from '../utils/api';
 import Rooms from './Rooms';
+
 export default function Dashboard() {
   const { token } = useSelector((state) => state.auth);
 
@@ -17,15 +18,15 @@ export default function Dashboard() {
     { name: 'Analytics', path: 'analiytics' },
     { name: 'Settings', path: 'settings' },
     { name: 'Help', path: 'help' },
-    {name:"Rooms",path:'/rooms'},
+    { name: 'Rooms', path: '/rooms' },
   ];
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-//   console.log('token:', token);
+  //   console.log('token:', token);
 
-//   if (!token) {
-//     navigate('/login');
-//   }
+  //   if (!token) {
+  //     navigate('/login');
+  //   }
 
   return (
     <div>
@@ -113,9 +114,9 @@ export default function Dashboard() {
         >
           <main>
             <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-              {activeLink === "/accommodations" && <Accomodations />}
-              {activeLink === "/bookings" && <Bookings />}
-              {activeLink === '/rooms' && <Rooms/>}
+              {activeLink === '/accommodations' && <Accomodations />}
+              {activeLink === '/bookings' && <Bookings />}
+              {activeLink === '/rooms' && <Rooms />}
 
             </div>
           </main>
