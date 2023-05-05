@@ -117,8 +117,8 @@ export default function Dashboard() {
         >
           <main>
             <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-              {activeLink === "/accommodations" && <Accomodations />}
-              {activeLink === "/bookings" && <Bookings />}
+              {activeLink === '/accommodations' && <Accomodations />}
+              {activeLink === '/bookings' && <Bookings />}
             </div>
           </main>
         </div>

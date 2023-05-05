@@ -1,7 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import {
+  Formik, Field, Form, ErrorMessage,
+} from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
@@ -120,7 +125,7 @@ export default function Login() {
 
                     <p
                       onClick={() => {
-                        navigate("/initiate-reset-password");
+                        navigate('/initiate-reset-password');
                       }}
                       className="cursor-pointer"
                     >
@@ -151,7 +156,7 @@ export default function Login() {
         </div>
       </div>
       <ToastContainer
-        position='top-right'
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -160,7 +165,7 @@ export default function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='colored'
+        theme="colored"
       />
     </div>
   );
