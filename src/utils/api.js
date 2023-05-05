@@ -58,7 +58,46 @@ export async function loginWithFacebook(accessToken) {
     return null;
   }
 }
+const logout = async () => {
+  try {
+    await axios.post(`${apiUrl}/users/logout`, null, {
+      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+    });
+    Cookies.remove('token');
+    console.log('Logged out successfully!');
+    window.location = '/login';
+  } catch (error) {
+    console.error(error);
+  }
+}
 
+export const initiateResetPassword = async (email) => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/users/initiate-reset-password`,
+      {
+        email,
+      },
+    );
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+    return null;
+  }
+};
+
+export const resetPassword = async (data, email) => {
+  try {
+    await axios.post(`${apiUrl}/users/reset-password`, {
+      email,
+      ...data,
+    });
+    return true;
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+    return null;
+  }
+};
 const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
