@@ -112,5 +112,5 @@ try{
 };
 
 export {
-  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetailsgetAllRooms,addBooking
+  login, getAllAccomodations, logout,register, verify, getAllBookings, searchAccommodations, getAccomodationDetails,getAllRooms,addBooking
 };
