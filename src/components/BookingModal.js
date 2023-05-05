@@ -1,7 +1,5 @@
-import React,{useState} from "react";
-import { apiUrl } from "../utils/api";
-import { toast, ToastContainer } from 'react-toastify'; // Import the toast module
-import 'react-toastify/dist/ReactToastify.min.css';
+import React from "react";
+import { apiUrl,addBooking } from "../utils/api";
 
 export default function BookingModal({roomId}) {
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +11,6 @@ export default function BookingModal({roomId}) {
    
  
   const handleSubmit = async (event) => {
-    console.log("submit")
     event.preventDefault();
     setError("");
     setSuccessMessage("");
@@ -87,7 +84,7 @@ export default function BookingModal({roomId}) {
                   </button>
                 </div>
                 {/*body*/}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={addBooking}>
                   <div className="relative p-6 flex-auto">
                     <label
                       htmlFor="check-in-date"
@@ -131,6 +128,7 @@ export default function BookingModal({roomId}) {
                   <button
                     className="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="submit"
+                    onClick={handleSubmit}
                   >
                     Save 
                   </button>
@@ -139,8 +137,6 @@ export default function BookingModal({roomId}) {
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          <ToastContainer />
-
         </>
       ) : null}
     </>
