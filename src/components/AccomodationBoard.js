@@ -3,6 +3,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 import AccomodationCard from './AccomodationCard';
 import {
   getAllAccomodations, getAllBookings, getAllRooms, deleteAccomodation,
@@ -41,6 +42,13 @@ export default function AccomodationBoard() {
   }, []);
   return (
     <div className="">
+      <div className=" bg-[#9D9D9D] h-[30px] ml-[1px] cursor-pointer w-[180px] flex justify-center overflow-hidden items-center
+                        rounded-[3px]"
+      >
+        <span className="text-white">
+          <Link to="/newaccomodation"> Add Accomodation </Link>
+        </span>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : data ? (

@@ -163,8 +163,21 @@ const getAllRooms = async () => {
   const response = await axios.get(`${apiUrl}/rooms/`);
   return response.data;
 };
+const addAccomodation = async (data) => {
+  const token = Cookies.get('token');
+  try {
+    await axios.post(`${apiUrl}/accommodations/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success('Accomodation updated successfully!');
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+  }
+};
 export {
   login, getAllAccomodations, logout, register, verify, getAllBookings,
   searchAccommodations, getAccomodationDetails, getAccomodation,
-  deleteAccomodation, updateAccomodation, getAllRooms,
+  deleteAccomodation, updateAccomodation, getAllRooms, addAccomodation,
 };
