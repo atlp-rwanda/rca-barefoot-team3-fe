@@ -55,7 +55,6 @@ export async function loginWithFacebook(accessToken) {
     const error = await response.text();
     throw new Error(error);
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
@@ -65,6 +64,21 @@ const getAllAccomodations = async () => {
 
   return response.data;
 };
+
+const searchAccommodations = async (params) => {
+  const response = await axios.get(`${apiUrl}/accommodations/search`, {
+    params
+  });
+
+  return response.data;
+};
+
+const getAccomodationDetails = async (id) => {
+  const response = await axios.get(`${apiUrl}/accommodations/${id}?rooms=1`);
+  return response.data;
+}
+
+
 const getAllBookings = async (token) => {
   const response = await axios.get(`${apiUrl}/booking/all`, {
     headers: {
@@ -96,6 +110,7 @@ try{
     }
     
 };
+
 export {
-  login, getAllAccomodations, register, verify, getAllBookings,getAllRooms,addBooking
+  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetailsgetAllRooms,addBooking
 };
