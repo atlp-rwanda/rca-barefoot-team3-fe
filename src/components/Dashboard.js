@@ -15,6 +15,7 @@ export default function Dashboard() {
     { name: 'Dashboard', path: '/' },
     { name: 'Accommodations', path: '/accommodations' },
     { name: 'Bookings', path: '/bookings' },
+    { name: 'Rooms', path: '/rooms' },
     { name: 'Analytics', path: 'analiytics' },
     { name: 'Settings', path: 'settings' },
     { name: 'Help', path: 'help' },
