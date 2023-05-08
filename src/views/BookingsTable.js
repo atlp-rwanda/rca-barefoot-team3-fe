@@ -1,29 +1,28 @@
-import React,{ useState, useEffect } from "react";
-import "tailwindcss/tailwind.css";
-import BookingModal from "../components/BookingModal";
+import React, { useState, useEffect } from 'react';
+import 'tailwindcss/tailwind.css';
+import BookingModal from '../components/BookingModal';
 
 const TABS = [
-  { label: "All", filter: "" },
-  { label: "Pending", filter: "pending" },
-  { label: "Accepted", filter: "confirmed" },
-  {label:"Rejected", filter:"rejected" },
+  { label: 'All', filter: '' },
+  { label: 'Pending', filter: 'pending' },
+  { label: 'Accepted', filter: 'confirmed' },
+  { label: 'Rejected', filter: 'rejected' },
 ];
 
 function BookingsPage() {
   const [bookings, setBookings] = useState([]);
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState('');
 
   useEffect(() => {
-    fetch("/bookings")
+    fetch('/bookings')
       .then((response) => response.json())
       .then((data) => setBookings(data))
       .catch((error) => console.error(error));
   }, []);
 
-  const filteredBookings =
-    activeTab === ""
-      ? bookings
-      : bookings.filter((booking) => booking.status === activeTab);
+  const filteredBookings = activeTab === ''
+    ? bookings
+    : bookings.filter((booking) => booking.status === activeTab);
 
   return (
     <div>
@@ -34,8 +33,8 @@ function BookingsPage() {
             key={tab.label}
             className={`px-4 py-2 rounded-l-md ${
               activeTab === tab.filter
-                ? "bg-gray-800 text-white"
-                : "bg-gray-200 text-gray-800"
+                ? 'bg-gray-800 text-white'
+                : 'bg-gray-200 text-gray-800'
             }`}
             onClick={() => setActiveTab(tab.filter)}
           >
@@ -63,7 +62,7 @@ function BookingsPage() {
           ))}
         </tbody>
       </table>
-      <BookingModal/>
+      <BookingModal />
     </div>
   );
 }

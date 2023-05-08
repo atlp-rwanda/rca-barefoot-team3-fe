@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { getAllBookings } from '../utils/api';
+import { getAllBookings } from '../utils/api'
 
 export default function Bookings() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,9 +14,8 @@ export default function Bookings() {
   useEffect(() => {
     async function get() {
       setLoading(true);
-      console.log("token",JSON.stringify(token))
-       const data = await getAllBookings(token);
-      setBookings(data?.bookings);
+       const data = await getAllBookings(token)
+      setBookings(data?.bookings)
       setLoading(false);
     }
     get();
