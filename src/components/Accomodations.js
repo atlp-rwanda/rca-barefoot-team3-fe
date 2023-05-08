@@ -29,7 +29,6 @@ export default function Accomodations() {
 
                     ))
                 )}
-            </div>
-        </>
+            </div></>
     )
 }
