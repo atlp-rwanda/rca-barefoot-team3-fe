@@ -12,11 +12,9 @@ import InitiateResetPassword from './views/InitiateResetPassword';
 import CheckEmailDialogPage from './views/CheckEmailDialogPage';
 import ResetPassword from './views/ResetPassword';
 import Dashboard from './components/Dashboard';
-import Rooms from './components/Rooms';
 
 function App() {
   const dispatch = useDispatch();
-  const token = Cookies.get('token');
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
