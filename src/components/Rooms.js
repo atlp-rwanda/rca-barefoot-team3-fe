@@ -1,6 +1,9 @@
 import React ,{useEffect, useState}from 'react'
 import { getAllRooms } from '../utils/api'
 import BookingModal from './BookingModal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Rooms() {
 
     const [loading, setLoading] = useState(true);
@@ -17,7 +20,18 @@ useEffect(() => {
   },[]);
   return (
     <div className='my-5'>
-
+<ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     {loading ? (
         <p>Loading ....</p>
       ) : (

@@ -25,6 +25,11 @@ $warning-color:#FF0000;
   }
 }
 
+
+* {
+  font-family: Inter;
+}
+
 // button styles
 .button-primary {
   @include button-style;

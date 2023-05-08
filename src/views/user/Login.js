@@ -1,22 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Formik, Field, Form, ErrorMessage,
 } from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
-import { login } from '../../utils/api';
-import { setToken, setAuthenticated,setLoggedUser } from '../../redux/authslice';
+import { login, loginWithFacebook } from '../../utils/api';
+import Button from '../../components/Button';
+import { setToken, setAuthenticated } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate=useNavigate();
   const initialValues = {
     email: '',
     password: '',
@@ -30,14 +30,14 @@ export default function Login() {
 
   const onSubmit = async (values, { setSubmitting }) => {
     const data = await login(values.email, values.password);
-    
+
     if (data) {
       dispatch(setToken(data.token));
       dispatch(setAuthenticated(true));
-      dispatch(setLoggedUser(data.user))
+      dispatch(setLoggedUser(data.user));
     }
+    navigate('/admin');
     setSubmitting(false);
-    navigate("/admin")
   };
 
   return (
@@ -47,9 +47,8 @@ export default function Login() {
           <div>
             <p className=" py-4 font-bold text-xl md:text-3xl">Sign In</p>
             <Link to="/register">
-
               <p>
-                Don't have an account?
+                Don&apos;t have an account?
                 <span className="text-orange-dark font-semibold ml-1">
                   Sign Up
                 </span>
@@ -93,6 +92,21 @@ export default function Login() {
                       component="div"
                       className="mt-2 text-red"
                     />
+                  </div>
+                  <div className="flex justify-between text-sm ">
+                    <div className="flex gap-2 text-sm text-gray-300">
+                      <input type="checkbox" />
+                      <p>Remember me?</p>
+                    </div>
+
+                    <p
+                      onClick={() => {
+                        navigate('/initiate-reset-password');
+                      }}
+                      className="cursor-pointer"
+                    >
+                      Forgot Password
+                    </p>
                   </div>
                   <button
                     type="submit"
