@@ -66,7 +66,8 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
->
+          </div>
+</nav>
       <div className="flex overflow-hidden pt-8">
         <aside
           id="sidebar"
@@ -116,6 +117,7 @@ export default function Dashboard() {
             </div>
           </main>
         </div>
+      </div>
       </div>
   );
 }
