@@ -27,18 +27,37 @@ const login = async (email, password) => {
       email,
       password,
     });
-    const { token } = response.data;
-    Cookies.set('token', token);
-    console.log(response);
+    const { data } = response;
+    Cookies.set('token', data.token);
+
     toast.success('You have been successfully authenticated!');
-    return token;
+    return data;
   } catch (error) {
-    console.log(error);
     toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
   }
 };
 
+export async function loginWithFacebook(accessToken) {
+  try {
+    const response = await fetch('/api/auth/facebook', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessToken }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.token;
+    }
+    const error = await response.text();
+    throw new Error(error);
+  } catch (error) {
+    return null;
+  }
+}
 const logout = async () => {
   try {
     await axios.post(`${apiUrl}/users/logout`, null, {
@@ -50,7 +69,7 @@ const logout = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const initiateResetPassword = async (email) => {
   try {
@@ -79,28 +98,6 @@ export const resetPassword = async (data, email) => {
     return null;
   }
 };
-
-export async function loginWithFacebook(accessToken) {
-  try {
-    const response = await fetch('/api/auth/facebook', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ accessToken }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.token;
-    }
-    const error = await response.text();
-    throw new Error(error);
-  } catch (error) {
-    return null;
-  }
-}
-
 const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
@@ -109,7 +106,7 @@ const getAllAccomodations = async () => {
 
 const searchAccommodations = async (params) => {
   const response = await axios.get(`${apiUrl}/accommodations/search`, {
-    params
+    params,
   });
 
   return response.data;
@@ -118,8 +115,7 @@ const searchAccommodations = async (params) => {
 const getAccomodationDetails = async (id) => {
   const response = await axios.get(`${apiUrl}/accommodations/${id}?rooms=1`);
   return response.data;
-}
-
+};
 
 const getAllBookings = async (token) => {
   const response = await axios.get(`${apiUrl}/booking/all`, {
@@ -129,7 +125,29 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
+const getAllRooms = async () => {
+  const response = await axios.get(`${apiUrl}/rooms`);
+
+  return response.data;
+};
+
+const addBooking = async (id, dateToCome, dateToLeave, user, token) => {
+  try {
+    await axios
+      .post(`${apiUrl}/booking/${id}`, {
+        dateToCome, dateToLeave, user,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+    toast.success('Room Booked successfully!');
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+  }
+};
 
 export {
-  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetails
+  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetails, getAllRooms, addBooking,
 };

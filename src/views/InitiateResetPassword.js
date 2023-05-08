@@ -1,4 +1,6 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik'; 
+import {
+  Formik, Field, Form, ErrorMessage,
+} from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -17,19 +19,13 @@ export default function InitiateResetPassword() {
       .required('Email is required!'),
   });
   const onSubmit = async (values) => {
-
     if (initiateResetPassword(values)) {
-
       toast.success('Check your email for the reset password link');
-      setTimeout(() => {navigate('/check-email')}, 2000);
-
+      setTimeout(() => { navigate('/check-email'); }, 2000);
     } else {
-
       toast.error('Something went wrong');
-
     }
-
-  }
+  };
   return (
     <div className=" flex justify-center w-full h-screen bg-orange-light ">
       <h2 className="text-3xl font-bold mt-6 md:mt-12">Barefoot</h2>
@@ -62,11 +58,11 @@ export default function InitiateResetPassword() {
                     placeholder="Enter your email address"
                     className="border border  font-light w-full p-3"
                   />
-                   <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="mt-2 text-red"
-                    />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="mt-2 text-red"
+                  />
                 </div>
                 <button
                   type="submit"
@@ -74,22 +70,22 @@ export default function InitiateResetPassword() {
                 >
                   Submit
                 </button>
-          </Form>
-        </Formik>
+              </Form>
+            </Formik>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
       <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
       />
     </div>
   );

@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Accomodations from './Accomodations';
 import Bookings from './Bookings';
 import { logout } from '../utils/api';
+import Rooms from './Rooms';
 
 export default function Dashboard() {
   const { token } = useSelector((state) => state.auth);
 
-  const [activeLink, setActiveLink] = useState('/');
+  const [activeLink, setActiveLink] = useState('/accommodations');
 
   const links = [
-    { name: 'Dashboard', path: '/' },
     { name: 'Accommodations', path: '/accommodations' },
     { name: 'Bookings', path: '/bookings' },
+    { name: 'Rooms', path: '/rooms' },
     { name: 'Analytics', path: 'analiytics' },
     { name: 'Settings', path: 'settings' },
     { name: 'Help', path: 'help' },
@@ -80,12 +81,12 @@ export default function Dashboard() {
                 {links.map(({ name, path }) => (
                   <div className="space-y-2 pt-2">
                     <p onClick={() => setActiveLink(path)} className="text-base font-normal rounded-lg transition duration-75 flex items-center p-2" rel="noreferrer">
-                          <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                              <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                            </svg>
-                          <span className="ml-3">{name}</span>
-                        </p>
+                      <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                      </svg>
+                      <span className="ml-3">{name}</span>
+                    </p>
                   </div>
                 ))}
               </div>
@@ -112,8 +113,10 @@ export default function Dashboard() {
         >
           <main>
             <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-              {activeLink === "/accommodations" && <Accomodations />}
-              {activeLink === "/bookings" && <Bookings />}
+              {activeLink === '/accommodations' && <Accomodations />}
+              {activeLink === '/bookings' && <Bookings />}
+              {activeLink === '/rooms' && <Rooms />}
+
             </div>
           </main>
         </div>

@@ -5,17 +5,22 @@ import { register, verify } from '../utils/api';
 const initialState = {
   isAuthenticated: false,
   token: null,
+  LoggedUser: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+
   reducers: {
     setToken(state, action) {
       state.token = action.payload;
     },
     setAuthenticated(state, action) {
       state.isAuthenticated = action.payload;
+    },
+    setLoggedUser(state, action) {
+      state.LoggedUser = action.payload;
     },
   },
 });
@@ -64,5 +69,5 @@ export const verifyUser = createAsyncThunk(
   },
 );
 
-export const { setToken, setAuthenticated } = authSlice.actions;
+export const { setToken, setAuthenticated, setLoggedUser } = authSlice.actions;
 export default authSlice.reducer;
