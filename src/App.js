@@ -29,7 +29,6 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/admin" element={<Dashboard />} />
-      <Route path="/bookings" element={<BookingsPage/>}/>
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
       <Route path='/verify' element={<Verify />} />
