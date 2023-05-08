@@ -27,9 +27,9 @@ const login = async (email, password) => {
       email,
       password,
     });
-    const  data= response.data;
+    const { data } = response;
     Cookies.set('token', data.token);
-   
+
     toast.success('You have been successfully authenticated!');
     return data;
   } catch (error) {
@@ -69,7 +69,7 @@ const logout = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const initiateResetPassword = async (email) => {
   try {
@@ -106,7 +106,7 @@ const getAllAccomodations = async () => {
 
 const searchAccommodations = async (params) => {
   const response = await axios.get(`${apiUrl}/accommodations/search`, {
-    params
+    params,
   });
 
   return response.data;
@@ -115,8 +115,7 @@ const searchAccommodations = async (params) => {
 const getAccomodationDetails = async (id) => {
   const response = await axios.get(`${apiUrl}/accommodations/${id}?rooms=1`);
   return response.data;
-}
-
+};
 
 const getAllBookings = async (token) => {
   const response = await axios.get(`${apiUrl}/booking/all`, {
@@ -132,24 +131,23 @@ const getAllRooms = async () => {
   return response.data;
 };
 
-const addBooking = async (id,dateToCome,dateToLeave,user,token) => {
-try{
-  await axios
-    .post(`${apiUrl}/booking/${id}`, {
-      dateToCome,dateToLeave,user
-    },{
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }})
-   
-      toast.success('Room Booked successfully!');
-    } catch(error){
-      toast.error(error.response.data.errors || 'Something went wrong!');
+const addBooking = async (id, dateToCome, dateToLeave, user, token) => {
+  try {
+    await axios
+      .post(`${apiUrl}/booking/${id}`, {
+        dateToCome, dateToLeave, user,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    }
-    
+    toast.success('Room Booked successfully!');
+  } catch (error) {
+    toast.error(error.response.data.errors || 'Something went wrong!');
+  }
 };
 
 export {
-  login, getAllAccomodations, logout,register, verify, getAllBookings, searchAccommodations, getAccomodationDetails,getAllRooms,addBooking
+  login, getAllAccomodations, logout, register, verify, getAllBookings, searchAccommodations, getAccomodationDetails, getAllRooms, addBooking,
 };

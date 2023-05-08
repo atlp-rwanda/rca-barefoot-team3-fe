@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import {
+  Formik, Field, Form, ErrorMessage,
+} from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
@@ -28,15 +30,14 @@ export default function Login() {
 
   const onSubmit = async (values, { setSubmitting }) => {
     const data = await login(values.email, values.password);
-    
+
     if (data) {
       dispatch(setToken(data.token));
       dispatch(setAuthenticated(true));
-      dispatch(setLoggedUser(data.user))
+      dispatch(setLoggedUser(data.user));
     }
-    navigate("/admin")
+    navigate('/admin');
     setSubmitting(false);
-    
   };
 
   return (
@@ -100,7 +101,7 @@ export default function Login() {
 
                     <p
                       onClick={() => {
-                        navigate("/initiate-reset-password");
+                        navigate('/initiate-reset-password');
                       }}
                       className="cursor-pointer"
                     >
@@ -130,7 +131,7 @@ export default function Login() {
         </div>
       </div>
       <ToastContainer
-        position='top-right'
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -139,7 +140,7 @@ export default function Login() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='colored'
+        theme="colored"
       />
     </div>
   );
