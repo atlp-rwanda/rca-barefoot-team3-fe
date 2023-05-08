@@ -10,8 +10,7 @@ import * as Yup from 'yup';
 import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
 import { login, loginWithFacebook } from '../../utils/api';
-import Button from '../../components/Button';
-import { setToken, setAuthenticated } from '../../redux/authslice';
+import { setToken, setAuthenticated, setLoggedUser } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
