@@ -5,7 +5,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import SocialButton from '../../components/SocialButton';
 import { login, loginWithFacebook } from '../../utils/api';
@@ -16,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate=useNavigate();
   const initialValues = {
     email: '',
     password: '',
@@ -36,8 +34,9 @@ export default function Login() {
       dispatch(setAuthenticated(true));
       dispatch(setLoggedUser(data.user))
     }
-    setSubmitting(false);
     navigate("/admin")
+    setSubmitting(false);
+    
   };
 
   return (
