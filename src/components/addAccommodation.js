@@ -79,7 +79,7 @@ export default function AddAccomodation() {
       values.meta.policies = values.meta.policies.split(',');
       values.meta.properties = values.meta.properties.split(',');
       await addAccomodation(values);
-      navigate('/admin');
+      navigate('/accommodation');
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +120,7 @@ export default function AddAccomodation() {
                         rounded-[3px]"
                 >
                   <span className="text-white">
-                    <Link to="/admin"> Go Back </Link>
+                    <Link to="/accommodation"> Go Back </Link>
                   </span>
                 </div>
                 <Formik

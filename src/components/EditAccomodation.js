@@ -53,7 +53,7 @@ export default function EditAccomodation() {
   const handleSubmit = async (values) => {
     try {
       await updateAccomodation(id, values);
-      navigate('/admin');
+      navigate('/accommodation');
     } catch (error) {
       console.log(error);
     }
@@ -436,7 +436,7 @@ export default function EditAccomodation() {
                         rounded-[3px]"
                         >
                           <span className="text-white">
-                            <Link to="/admin"> Cancel</Link>
+                            <Link to="/accommodation"> Cancel</Link>
                           </span>
                         </div>
                       </div>

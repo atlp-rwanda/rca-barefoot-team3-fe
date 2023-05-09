@@ -38,7 +38,7 @@ export default function Login() {
       dispatch(setAuthenticated(true));
       dispatch(setLoggedUser(data.user));
     }
-    navigate('/admin');
+    navigate('/accommodation');
     setSubmitting(false);
   };
 
