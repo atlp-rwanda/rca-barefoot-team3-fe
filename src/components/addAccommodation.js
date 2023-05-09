@@ -79,7 +79,7 @@ export default function AddAccomodation() {
       values.meta.policies = values.meta.policies.split(',');
       values.meta.properties = values.meta.properties.split(',');
       await addAccomodation(values);
-      navigate('/admin');
+      navigate('/accommodation');
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +120,7 @@ export default function AddAccomodation() {
                         rounded-[3px]"
                 >
                   <span className="text-white">
-                    <Link to="/admin"> Go Back </Link>
+                    <Link to="/accommodation"> Go Back </Link>
                   </span>
                 </div>
                 <Formik
@@ -151,7 +151,7 @@ export default function AddAccomodation() {
                               type="text"
                               autocomplete="off"
                               placeholder="Name"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                               rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                             />
                             <ErrorMessage name="name" />
@@ -195,7 +195,7 @@ export default function AddAccomodation() {
                               type="text"
                               autocomplete="off"
                               placeholder="Description"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                             />
                             <ErrorMessage name="description" />
@@ -213,7 +213,7 @@ export default function AddAccomodation() {
                               name="contacts.email"
                               type="email"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Email"
                             />
@@ -233,7 +233,7 @@ export default function AddAccomodation() {
                               name="contacts.phone_number"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Phone"
                             />
@@ -253,7 +253,7 @@ export default function AddAccomodation() {
                               name="contacts.website"
                               type="url"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Website"
                             />
@@ -281,7 +281,7 @@ export default function AddAccomodation() {
                               name="location.country"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                               rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Country"
                             />
@@ -301,7 +301,7 @@ export default function AddAccomodation() {
                               name="location.province"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Province"
                             />
@@ -320,7 +320,7 @@ export default function AddAccomodation() {
                               name="location.district"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="District"
                             />
@@ -339,7 +339,7 @@ export default function AddAccomodation() {
                               name="location.city"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="City"
                             />
@@ -359,7 +359,7 @@ export default function AddAccomodation() {
                               name="location.sector"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Sector"
                             />
@@ -379,7 +379,7 @@ export default function AddAccomodation() {
                               name="location.cell"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Cell"
                             />
@@ -398,7 +398,7 @@ export default function AddAccomodation() {
                               name="location.village"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Village"
                             />
@@ -417,7 +417,7 @@ export default function AddAccomodation() {
                               name="location.postal_code"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Postal Code"
                             />
@@ -436,7 +436,7 @@ export default function AddAccomodation() {
                               name="location.latitude"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Latitude"
                             />
@@ -455,7 +455,7 @@ export default function AddAccomodation() {
                               name="location.longitude"
                               type="text"
                               autocomplete="off"
-                              className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                              className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                 rounded-[5px] focus:outline-none h-[37px] focus:border-[#E66B31]"
                               placeholder="Longitude"
                             />
@@ -488,7 +488,7 @@ export default function AddAccomodation() {
                                     {...field}
                                     id="amenities"
                                     placeholder="Enter amenities separated by commas"
-                                    className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                                    className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                     rounded-[5px] w-[32%] focus:outline-none h-[47px] focus:border-[#E66B31]"
                                     autoComplete="off"
                                   />
@@ -517,7 +517,7 @@ export default function AddAccomodation() {
                                     {...field}
                                     id="policies"
                                     placeholder="Enter policies separated by commas"
-                                    className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                                    className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                     rounded-[5px] focus:outline-none h-[47px] w-[32%] focus:border-[#E66B31]"
                                     autoComplete="off"
                                   />
@@ -546,7 +546,7 @@ export default function AddAccomodation() {
                                     {...field}
                                     id="properties"
                                     placeholder="Enter properties separated by commas"
-                                    className="box-border border-[2px] text-[#424242] border-[#9D9D9D]
+                                    className="box-border p-4 border-[2px] text-[#424242] border-[#9D9D9D]
                                     rounded-[5px] w-[32%]focus:outline-none h-[47px] focus:border-[#E66B31]"
                                     autoComplete="off"
                                   />
