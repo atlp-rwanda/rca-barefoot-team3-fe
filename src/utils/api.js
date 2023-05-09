@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import Cookies from "js-cookie";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
-const apiUrl = 'http://localhost:8000/api/v1';
+const apiUrl = "http://localhost:8000/api/v1";
 
 const register = (
   first_name,
@@ -13,38 +13,46 @@ const register = (
   password,
   password_confirmation,
   username,
-  email,
-) => axios.post(`${apiUrl}/users`, {
-  first_name, last_name, gender, password, password_confirmation, username, email,
-});
+  email
+) =>
+  axios.post(`${apiUrl}/users`, {
+    first_name,
+    last_name,
+    gender,
+    password,
+    password_confirmation,
+    username,
+    email,
+  });
 
-const verify = (code, email) => axios.post(`${apiUrl}/users/verify/${email}`, {
-  code,
-});
+  const verify = (code, email) =>
+  axios.post(`${apiUrl}/users/verify/${email}`, {
+    code,
+  });
 
-const login = async (email, password) => {
+  const login = async (email, password) => {
   try {
     const response = await axios.post(`${apiUrl}/users/login`, {
       email,
       password,
     });
     const { data } = response;
-    Cookies.set('token', data.token);
+    Cookies.set("token", data.token);
 
-    toast.success('You have been successfully authenticated!');
+    toast.success("You have been successfully authenticated!");
     return data;
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
     return null;
   }
 };
 
 export async function loginWithFacebook(accessToken) {
   try {
-    const response = await fetch('/api/auth/facebook', {
-      method: 'GET',
+    const response = await fetch("/api/auth/facebook", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ accessToken }),
     });
@@ -59,14 +67,15 @@ export async function loginWithFacebook(accessToken) {
     return null;
   }
 }
+
 const logout = async () => {
   try {
     await axios.post(`${apiUrl}/users/logout`, null, {
-      headers: { Authorization: `Bearer ${Cookies.get('token')}` },
+      headers: { Authorization: `Bearer ${Cookies.get("token")}` },
     });
-    Cookies.remove('token');
-    console.log('Logged out successfully!');
-    window.location = '/login';
+    Cookies.remove("token");
+    console.log("Logged out successfully!");
+    window.location = "/login";
   } catch (error) {
     console.error(error);
   }
@@ -78,11 +87,11 @@ export const initiateResetPassword = async (email) => {
       `${apiUrl}/users/initiate-reset-password`,
       {
         email,
-      },
+      }
     );
     return true;
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
     return null;
   }
 };
@@ -95,17 +104,18 @@ export const resetPassword = async (data, email) => {
     });
     return true;
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
     return null;
   }
 };
-const getAllAccomodations = async () => {
+
+export const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
   return response.data;
 };
 
-const searchAccommodations = async (params) => {
+export const searchAccommodations = async (params) => {
   const response = await axios.get(`${apiUrl}/accommodations/search`, {
     params,
   });
@@ -113,12 +123,12 @@ const searchAccommodations = async (params) => {
   return response.data;
 };
 
-const getAccomodationDetails = async (id) => {
+export const getAccomodationDetails = async (id) => {
   const response = await axios.get(`${apiUrl}/accommodations/${id}?rooms=1`);
   return response.data;
 };
 
-const getAllBookings = async (token) => {
+export const getAllBookings = async (token) => {
   const response = await axios.get(`${apiUrl}/booking/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -126,74 +136,85 @@ const getAllBookings = async (token) => {
   });
   return response.data;
 };
-const getAccomodation = async (id) => {
+
+export const getAccomodation = async (id) => {
   const response = await axios.get(`${apiUrl}/accommodations/${id}`);
   return response.data;
 };
-const deleteAccomodation = async (id) => {
-  const token = Cookies.get('token');
+
+export const deleteAccomodation = async (id) => {
+  const token = Cookies.get("token");
   try {
     await axios.delete(`${apiUrl}/accommodations/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    toast.success('Accomodation deleted successfully!');
+    toast.success("Accomodation deleted successfully!");
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
   }
 };
-const updateAccomodation = async (id, data) => {
-  const token = Cookies.get('token');
+
+export const updateAccomodation = async (id, data) => {
+  const token = Cookies.get("token");
   try {
     await axios.put(`${apiUrl}/accommodations/${id}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    toast.success('Accomodation updated successfully!');
+    toast.success("Accomodation updated successfully!");
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
   }
 };
 
-const addAccomodation = async (data) => {
-  const token = Cookies.get('token');
+export const addAccomodation = async (data) => {
+  const token = Cookies.get("token");
   try {
     await axios.post(`${apiUrl}/accommodations/`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).then(
-      (response) => {
-        toast.success('Accomodation added successfully!');
-      },
-    );
-const getAllRooms = async () => {
+    });
+    toast.success("Accomodation added successfully!");
+  } catch (error) {
+    toast.error(error.response.data.errors || "Something went wrong!");
+  }
+};
+
+export const getAllRooms = async () => {
   const response = await axios.get(`${apiUrl}/rooms`);
 
   return response.data;
 };
 
-const addBooking = async (id, dateToCome, dateToLeave, user, token) => {
+export const addBooking = async (id, dateToCome, dateToLeave, user, token) => {
   try {
-    await axios
-      .post(`${apiUrl}/booking/${id}`, {
-        dateToCome, dateToLeave, user,
-      }, {
+    await axios.post(
+      `${apiUrl}/booking/${id}`,
+      {
+        dateToCome,
+        dateToLeave,
+        user,
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      }
+    );
 
-    toast.success('Room Booked successfully!');
+    toast.success("Room Booked successfully!");
   } catch (error) {
-    toast.error(error.response.data.errors || 'Something went wrong!');
+    toast.error(error.response.data.errors || "Something went wrong!");
   }
 };
-    
+
 export {
-  login, getAllAccomodations, logout, register, verify, getAllBookings,
-  searchAccommodations, getAccomodationDetails, getAccomodation,
-  deleteAccomodation, updateAccomodation, getAllRooms, addAccomodation, addBooking
+  login,
+  logout,
+  register,
+  verify,
 };
