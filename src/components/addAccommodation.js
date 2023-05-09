@@ -43,9 +43,9 @@ export default function AddAccomodation() {
     description: '',
     type: '',
     meta: {
-      amenities: [],
-      policies: [],
-      properties: [],
+      amenities: [''],
+      policies: [''],
+      properties: [''],
     },
     contacts: {
       email: '',
@@ -74,6 +74,9 @@ export default function AddAccomodation() {
   const navigate = useNavigate();
   const handleSubmit = async (values) => {
     try {
+      values.meta.amenities = values.meta.amenities.split(',');
+      values.meta.policies = values.meta.policies.split(',');
+      values.meta.properties = values.meta.properties.split(',');
       await addAccomodation(values);
       navigate('/admin');
     } catch (error) {
