@@ -1,9 +1,15 @@
+
+/* eslint-disable react/no-invalid-html-attribute */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Accomodations from './Accomodations';
 import Bookings from './Bookings';
 import { logout } from '../utils/api';
+import AccomodationBoard from './AccomodationBoard';
 import Rooms from './Rooms';
 
 export default function Dashboard() {
@@ -12,7 +18,8 @@ export default function Dashboard() {
   const [activeLink, setActiveLink] = useState('/accommodations');
 
   const links = [
-    { name: 'Accommodations', path: '/accommodations' },
+    { name: 'Dashboard', path: '/' },
+    { name: 'Accommodations', path: '/accommodation' },
     { name: 'Bookings', path: '/bookings' },
     { name: 'Rooms', path: '/rooms' },
     { name: 'Analytics', path: 'analiytics' },
@@ -112,8 +119,8 @@ export default function Dashboard() {
           className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
         >
           <main>
-            <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
-              {activeLink === '/accommodations' && <Accomodations />}
+            <div className="px-20 pt-12 bg-[#FFEADF] ">
+              {activeLink === '/accommodation' && <AccomodationBoard />}
               {activeLink === '/bookings' && <Bookings />}
               {activeLink === '/rooms' && <Rooms />}
 

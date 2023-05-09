@@ -12,6 +12,9 @@ import InitiateResetPassword from './views/InitiateResetPassword';
 import CheckEmailDialogPage from './views/CheckEmailDialogPage';
 import ResetPassword from './views/ResetPassword';
 import Dashboard from './components/Dashboard';
+import AccomodationBoard from './components/AccomodationBoard';
+import EditAccomodation from './components/EditAccomodation';
+import AddAccomodation from './components/addAccommodation';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +30,9 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/admin" element={<Dashboard />} />
+      <Route path="/accomodation" element={<AccomodationBoard />} />
+      <Route path="/editaccomodation/:id" element={<EditAccomodation />} />
+      <Route path="/newaccomodation" element={<AddAccomodation />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/verify" element={<Verify />} />
