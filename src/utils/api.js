@@ -28,18 +28,37 @@ const login = async (email, password) => {
       email,
       password,
     });
-    const { token } = response.data;
-    Cookies.set('token', token);
-    console.log(response);
+    const { data } = response;
+    Cookies.set('token', data.token);
+
     toast.success('You have been successfully authenticated!');
-    return token;
+    return data;
   } catch (error) {
-    console.log(error);
     toast.error(error.response.data.errors || 'Something went wrong!');
     return null;
   }
 };
 
+export async function loginWithFacebook(accessToken) {
+  try {
+    const response = await fetch('/api/auth/facebook', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessToken }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.token;
+    }
+    const error = await response.text();
+    throw new Error(error);
+  } catch (error) {
+    return null;
+  }
+}
 const logout = async () => {
   try {
     await axios.post(`${apiUrl}/users/logout`, null, {
@@ -80,28 +99,6 @@ export const resetPassword = async (data, email) => {
     return null;
   }
 };
-
-export async function loginWithFacebook(accessToken) {
-  try {
-    const response = await fetch('/api/auth/facebook', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ accessToken }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.token;
-    }
-    const error = await response.text();
-    throw new Error(error);
-  } catch (error) {
-    return null;
-  }
-}
-
 const getAllAccomodations = async () => {
   const response = await axios.get(`${apiUrl}/accommodations/`);
 
@@ -159,10 +156,7 @@ const updateAccomodation = async (id, data) => {
     toast.error(error.response.data.errors || 'Something went wrong!');
   }
 };
-const getAllRooms = async () => {
-  const response = await axios.get(`${apiUrl}/rooms/`);
-  return response.data;
-};
+
 const addAccomodation = async (data) => {
   const token = Cookies.get('token');
   try {
@@ -175,12 +169,31 @@ const addAccomodation = async (data) => {
         toast.success('Accomodation added successfully!');
       },
     );
+const getAllRooms = async () => {
+  const response = await axios.get(`${apiUrl}/rooms`);
+
+  return response.data;
+};
+
+const addBooking = async (id, dateToCome, dateToLeave, user, token) => {
+  try {
+    await axios
+      .post(`${apiUrl}/booking/${id}`, {
+        dateToCome, dateToLeave, user,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+    toast.success('Room Booked successfully!');
   } catch (error) {
     toast.error(error.response.data.errors || 'Something went wrong!');
   }
 };
+    
 export {
   login, getAllAccomodations, logout, register, verify, getAllBookings,
   searchAccommodations, getAccomodationDetails, getAccomodation,
-  deleteAccomodation, updateAccomodation, getAllRooms, addAccomodation,
+  deleteAccomodation, updateAccomodation, getAllRooms, addAccomodation, addBooking
 };

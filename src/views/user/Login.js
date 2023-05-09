@@ -11,35 +11,10 @@ import { GrFacebook } from 'react-icons/gr';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 import { ToastContainer } from 'react-toastify';
-import FacebookLogin from 'react-facebook-login';
 import SocialButton from '../../components/SocialButton';
 import { login, loginWithFacebook } from '../../utils/api';
-import Button from '../../components/Button';
-import { setToken, setAuthenticated } from '../../redux/authslice';
+import { setToken, setAuthenticated, setLoggedUser } from '../../redux/authslice';
 import 'react-toastify/dist/ReactToastify.css';
-
-function LoginWithFacebook() {
-  const dispatch = useDispatch();
-
-  const responseFacebook = async (response) => {
-    if (response.accessToken) {
-      const token = await loginWithFacebook(response.accessToken);
-      if (token) {
-        dispatch(setToken(token));
-        dispatch(setAuthenticated(true));
-      }
-    }
-  };
-
-  return (
-    <FacebookLogin
-      appId="880261419941182"
-      fields="name,email,picture"
-      callback={responseFacebook}
-      icon="fa-facebook"
-    />
-  );
-}
 
 export default function Login() {
   const navigate = useNavigate();
@@ -56,11 +31,14 @@ export default function Login() {
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
-    const token = await login(values.email, values.password);
-    if (token) {
-      dispatch(setToken(token));
+    const data = await login(values.email, values.password);
+
+    if (data) {
+      dispatch(setToken(data.token));
       dispatch(setAuthenticated(true));
+      dispatch(setLoggedUser(data.user));
     }
+    navigate('/admin');
     setSubmitting(false);
   };
 
@@ -142,9 +120,8 @@ export default function Login() {
                 </Form>
               )}
             </Formik>
-            <SocialButton icon={<FcGoogle />} text="Sign in with Google" handleClick={() => console.log('Google login clicked!')} />
-            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" handleClick={() => console.log('Facebook login clicked!')} />
-            <LoginWithFacebook icon={<GrFacebook />} />
+            <SocialButton icon={<FcGoogle />} text="Sign in with Google" />
+            <SocialButton icon={<GrFacebook />} text="Sign in with Facebook" />
           </div>
         </div>
         <div className=" bg-black w-6/12">
