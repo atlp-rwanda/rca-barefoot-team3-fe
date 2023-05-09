@@ -116,7 +116,7 @@ export default function Dashboard() {
           className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
         >
           <main>
-            <div className="px-20 pt-12 bg-[#FFEADF] h-screen">
+            <div className="px-20 pt-12 bg-[#FFEADF] ">
               {activeLink === '/accommodation' && <AccomodationBoard />}
               {activeLink === '/bookings' && <Bookings />}
             </div>

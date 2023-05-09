@@ -170,8 +170,11 @@ const addAccomodation = async (data) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-    toast.success('Accomodation updated successfully!');
+    }).then(
+      (response) => {
+        toast.success('Accomodation added successfully!');
+      },
+    );
   } catch (error) {
     toast.error(error.response.data.errors || 'Something went wrong!');
   }

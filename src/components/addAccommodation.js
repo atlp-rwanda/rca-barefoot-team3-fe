@@ -66,6 +66,7 @@ export default function AddAccomodation() {
     },
   };
   const typeOptions = [
+    { value: '', label: 'Select Value' },
     { value: 'HOTEL', label: 'Hotel' },
     { value: 'LODGE', label: 'Lodge' },
     { value: 'MOTEL', label: 'Motel' },
