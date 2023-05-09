@@ -15,7 +15,7 @@ import Rooms from './Rooms';
 export default function Dashboard() {
   const { token } = useSelector((state) => state.auth);
 
-  const [activeLink, setActiveLink] = useState('/accommodations');
+  const [activeLink, setActiveLink] = useState('/accommodation');
 
   const links = [
     { name: 'Dashboard', path: '/' },
