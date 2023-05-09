@@ -4,6 +4,7 @@
     "jest": true,
     "node": true
   },
+  "parser": "@babel/eslint-parser",
   "extends": ["airbnb", "plugin:react-hooks/recommended", "plugin:storybook/recommended"],
   "plugins": ["import", "jsx-a11y", "react", "react-hooks", "jest"],
   "rules": {
@@ -18,6 +19,8 @@
     "react/prop-types": "off",
     "camelcase": "off",
     "no-param-reassign": "off",
+    "no-tabs": 0,
+    "no-mixed-spaces-and-tabs": 0,
     "import/no-named-as-default-member": "off"
   }
 }

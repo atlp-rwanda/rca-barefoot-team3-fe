@@ -26,6 +26,7 @@
     "testEnvironment": "jsdom"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.21.8",
     "@reduxjs/toolkit": "^1.9.5",
     "@storybook/testing-library": "0.0.14-next.2",
     "autoprefixer": "^10.4.14",
@@ -59,6 +60,7 @@
     "react-toastify": "^9.1.2",
     "redux": "^4.2.1",
     "sass": "^1.62.0",
+    "tailwindcss": "^3.3.1",
     "sass-loader": "^13.2.2",
     "storybook": "7.0.6",
     "style-loader": "^3.3.2",
@@ -102,7 +104,6 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^7.2.4",
     "postcss-normalize": "^10.0.1",
-    "postcss-preset-env": "^8.3.2",
-    "tailwindcss": "^3.3.1"
+    "postcss-preset-env": "^8.3.2"
   }
 }
