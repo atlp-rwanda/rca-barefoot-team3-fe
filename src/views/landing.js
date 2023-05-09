@@ -7,7 +7,7 @@ import { getAccomodationDetails, searchAccommodations } from "../utils/api";
 
 import { AccommodationCard } from "../components/accommodation"
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -18,6 +18,7 @@ function Logo(){
 }
 
 function Hero({ setFetching, setAccommodations }){
+	const navigate = useNavigate();
 	let url = window.location.origin
 
 	async function update(query){
@@ -41,7 +42,7 @@ function Hero({ setFetching, setAccommodations }){
 				<div className='flex justify-between items-center'>
 					<Logo />
 					<div>
-						<Button text='Sign in' className='my-2 w-full h-12 button-primary px-16' />
+						<Button text='Sign in' className='my-2 w-full h-12 button-primary px-16' handleClick={()=>{navigate('/login')}} />
 					</div>
 				</div>
 				<div>
