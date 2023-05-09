@@ -35,7 +35,7 @@ export default function BookingModal({ roomId }) {
 
     await addBooking(roomId, dateToCome, dateToLeave, user, token)
       .then(() => {
-        navigate('/accommodation');
+        navigate('/admin');
         setShowModal(false);
       })
       .catch((error) => {

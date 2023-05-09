@@ -5,10 +5,9 @@ import Button from "../components/Button"
 import { Input } from "../components/input";
 import { getAccomodationDetails, searchAccommodations } from "../utils/api";
 
-
 import { AccommodationCard } from "../components/accommodation"
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -19,7 +18,6 @@ function Logo(){
 }
 
 function Hero({ setFetching, setAccommodations }){
-	const navigate = useNavigate();
 	let url = window.location.origin
 
 	async function update(query){
@@ -32,7 +30,6 @@ function Hero({ setFetching, setAccommodations }){
 		update({})
 	}, [])
 
-
   return (
 		<div
 			className='h-[80vh] max-h-[910px] bg-center text-white p-16'
@@ -44,7 +41,7 @@ function Hero({ setFetching, setAccommodations }){
 				<div className='flex justify-between items-center'>
 					<Logo />
 					<div>
-						<Button text='Sign in' className='my-2 w-full h-12 button-primary px-16' handleClick={()=>{navigate('/login')}}/>
+						<Button text='Sign in' className='my-2 w-full h-12 button-primary px-16' />
 					</div>
 				</div>
 				<div>
