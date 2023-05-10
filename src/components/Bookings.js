@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getAllBookings } from '../utils/api'
+import { getAllBookings } from '../utils/api';
 
 export default function Bookings() {
   const [currentPage, setCurrentPage] = useState(1);
   const [bookingsPerPage] = useState(5);
   const [searchValue, setSearchValue] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-   const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token } = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
     async function get() {
       setLoading(true);
-       const data = await getAllBookings(token)
-      setBookings(data?.bookings)
+      const data = await getAllBookings(token);
+      setBookings(data?.bookings);
       setLoading(false);
     }
     get();
@@ -26,7 +26,14 @@ export default function Bookings() {
     filteredBookings = bookings.filter((booking) => {
       // Check if the search value matches any property of the booking object
       for (const property in booking) {
-        if (booking.hasOwnProperty(property) && booking[property] && booking[property].toString().toLowerCase().includes(searchValue.toLowerCase())) {
+        if (
+          booking.prototype.hasOwnProperty.call(property)
+          && booking[property]
+          && booking[property]
+            .toString()
+            .toLowerCase()
+            .includes(searchValue.toLowerCase())
+        ) {
           return true; // Return true if a match is found
         }
       }
@@ -52,7 +59,6 @@ export default function Bookings() {
 
   return (
     <div>
-
       <input
         className="p-3 rounded"
         placeholder="Search bookings"
@@ -94,12 +100,10 @@ export default function Bookings() {
         >
           Rejected
         </button>
-
       </div>
       {loading ? (
         <p>Loading ....</p>
       ) : (
-
         <table className="table table-responsive table-auto w-full p-2 bg-white">
           <thead className="font-bold">
             <tr className="border-b border-gray-300">
@@ -112,8 +116,8 @@ export default function Bookings() {
             </tr>
           </thead>
           <tbody>
-            {currentBookings.map((booking, index) => (
-              <tr className="border-b  border-gray-300 text-center" key={index}>
+            {currentBookings.map((booking) => (
+              <tr className="border-b  border-gray-300 text-center">
                 <td className="py-8 font-bold">{booking.userId}</td>
                 <td className="py-8">{booking.created_at.split('T')[0]}</td>
                 <td className="py-8">{booking.dateToCome.split('T')[0]}</td>
@@ -123,26 +127,46 @@ export default function Bookings() {
               </tr>
             ))}
           </tbody>
-
         </table>
       )}
 
       <div className=" w-[100%]  my-4 ">
         {bookings.length > bookingsPerPage && (
-        <div className="w-full flex  space-x-12 justify-end">
-          <button className="p-2 border-2 border-orange w-32" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-          {Array.from({ length: Math.ceil(bookings.length / bookingsPerPage) }, (v, i) => i + 1).map((number) => (
+          <div className="w-full flex  space-x-12 justify-end">
             <button
-              className={`rounded w-12 h-12 ${currentPage === number ? 'bg-orange text-white' : 'bg-none text-orange'}`}
-              key={number}
-              onClick={() => paginate(number)}
-              disabled={currentPage === number}
+              className="p-2 border-2 border-orange w-32"
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
             >
-              {number}
+              Previous
             </button>
-          ))}
-          <button className="p-2 border-2 border-orange w-32" onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(bookings.length / bookingsPerPage)}>Next</button>
-        </div>
+            {Array.from(
+              { length: Math.ceil(bookings.length / bookingsPerPage) },
+              (v, i) => i + 1,
+            ).map((number) => (
+              <button
+                className={`rounded w-12 h-12 ${
+                  currentPage === number
+                    ? 'bg-orange text-white'
+                    : 'bg-none text-orange'
+                }`}
+                key={number}
+                onClick={() => paginate(number)}
+                disabled={currentPage === number}
+              >
+                {number}
+              </button>
+            ))}
+            <button
+              className="p-2 border-2 border-orange w-32"
+              onClick={() => paginate(currentPage + 1)}
+              disabled={
+                currentPage === Math.ceil(bookings.length / bookingsPerPage)
+              }
+            >
+              Next
+            </button>
+          </div>
         )}
       </div>
     </div>
