@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-const apiUrl = 'https://team-3-barefoot.onrender.com';
+const apiUrl = 'https://barefoot-3-backend.onrender.com/api/v1';
 
 const register = (
   first_name,
