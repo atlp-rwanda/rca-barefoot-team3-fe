@@ -1,9 +1,7 @@
-//  <!-- eslint-disable max-len -->
-
 import React, { useEffect, useState } from 'react';
 import { submitHandler } from 'submithandler';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { Input } from '../components/input';
 import { getAccomodationDetails, searchAccommodations } from '../utils/api';
@@ -19,6 +17,7 @@ function Logo() {
 }
 
 function Hero({ setFetching, setAccommodations }) {
+  const navigate = useNavigate();
   const url = window.location.origin;
 
   async function update(query) {
@@ -42,7 +41,7 @@ function Hero({ setFetching, setAccommodations }) {
         <div className="flex justify-between items-center">
           <Logo />
           <div>
-            <Button text="Sign in" className="my-2 w-full h-12 button-primary px-16" />
+            <Button text="Sign in" className="my-2 w-full h-12 button-primary px-16" handleClick={() => { navigate('/login'); }} />
           </div>
         </div>
         <div>
@@ -114,8 +113,8 @@ function Accommodations({ fetching, setActiveHoteDetail, accommodations = [] }) 
           accommodations found
         </div>
         <div className="grid grid-cols-1 py-16 gap-8 md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {accommodations.map((acc, key) => (
-            <AccommodationCard setActiveHoteDetail={setActiveHoteDetail} accommodation={acc} key={key}>Hello world</AccommodationCard>
+          {accommodations.map((acc) => (
+            <AccommodationCard setActiveHoteDetail={setActiveHoteDetail} accommodation={acc}>Hello world</AccommodationCard>
           ))}
         </div>
       </div>
@@ -124,19 +123,19 @@ function Accommodations({ fetching, setActiveHoteDetail, accommodations = [] }) 
 }
 
 function AccommodationDetail({ id }) {
-  const [{ accommodation, rooms }, setDetails] = useState({
+  const [{ accommodation }, setDetails] = useState({
     accommodation: null, rooms: [],
   });
 
   useEffect(() => {
     (async function () {
-      const { accommodation, rooms } = await getAccomodationDetails(id);
+      const { rooms } = await getAccomodationDetails(id);
       console.log('Working ..... ');
       setDetails({ accommodation, rooms });
     }());
   }, [id]);
 
-  if (!accommodation) return <></>;
+  if (!accommodation) return;
 
   return (
     <div className="container w-full h-full mx-auto py-16 px-2 lg:px-16">
@@ -183,4 +182,3 @@ export function LandingPage() {
     </div>
   );
 }
-// <!-- eslint-enable max-len -->

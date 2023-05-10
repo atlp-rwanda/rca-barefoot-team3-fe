@@ -47,9 +47,9 @@ export default function Rooms() {
             </tr>
           </thead>
           <tbody>
-            {rooms?.map((room, index) => (
+            {rooms?.map((room) => (
 
-              <tr className="border-b  border-gray-300 text-center" key={index}>
+              <tr className="border-b  border-gray-300 text-center">
                 <td className="py-8 font-bold">{room.id}</td>
                 <td className="py-8">{room.accommodation_id}</td>
                 <td className="py-8">{room.type}</td>

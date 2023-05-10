@@ -27,7 +27,7 @@ export default function Bookings() {
       // Check if the search value matches any property of the booking object
       for (const property in booking) {
         if (
-          booking.hasOwnProperty(property)
+          booking.prototype.hasOwnProperty.call(property)
           && booking[property]
           && booking[property]
             .toString()
@@ -116,8 +116,8 @@ export default function Bookings() {
             </tr>
           </thead>
           <tbody>
-            {currentBookings.map((booking, index) => (
-              <tr className="border-b  border-gray-300 text-center" key={index}>
+            {currentBookings.map((booking) => (
+              <tr className="border-b  border-gray-300 text-center">
                 <td className="py-8 font-bold">{booking.userId}</td>
                 <td className="py-8">{booking.created_at.split('T')[0]}</td>
                 <td className="py-8">{booking.dateToCome.split('T')[0]}</td>
