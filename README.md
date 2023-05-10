@@ -58,7 +58,7 @@ This a frontend of ``` Barefoot nomad ``` an application that will enable its â€
 
 ## Acknowledgments
 
-Credits goes to the [**Andela Team**](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding) for providing this life changing experience
+Credits goes to the [**Andela Team**]() and [**RCA**]() for providing this life changing experience
 
 
 
