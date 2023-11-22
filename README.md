@@ -29,6 +29,9 @@ This a frontend of ``` Barefoot nomad ``` an application that will enable its �
 
 ## Authors
 
+👤 **Lydia Ingabire**
+   - GitHub: [Lydia](https://github.com/DeliceLydia)
+
 👤 **Best Verie Iradukunda**
    - GitHub: [Best](https://github.com/Best-Verie)
 
